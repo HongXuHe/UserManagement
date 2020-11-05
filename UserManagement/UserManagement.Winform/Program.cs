@@ -10,16 +10,19 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserManagement.Entity;
+using UserManagement.IRepository;
+using UserManagement.Repository;
+using UserManagement.UnitOfWok;
 using UserManagement.Utility.AutofacModule;
 
 namespace UserManagement.Winform
 {
     static class Program
     {
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -35,7 +38,19 @@ namespace UserManagement.Winform
                          config.UseSqlServer(connStr);
                      });
                      services.AddScoped<Form1>();
-                    // Bootstrap();
+                     services.AddScoped<IUnitOfWork,UnitOfWok.UnitOfWork>();
+                     var assIRepos = Assembly.Load("UserManagement.IRepository");
+                     var assRepos = Assembly.Load("UserManagement.Repository");
+                     foreach (var itype in assIRepos.GetTypes().Where(t => t.IsInterface && !t.IsGenericType))
+                     {
+                         foreach (var type in assRepos.GetTypes().Where(t=>t.Name.EndsWith("Repo")))
+                         {
+                             if (itype.IsAssignableFrom(type))
+                             {
+                                 services.AddScoped(itype, type);
+                             }
+                         }
+                     };
 
                      var logger = new LoggerConfiguration()
                          .WriteTo.File("logs\\log.txt",rollingInterval:RollingInterval.Day)
@@ -60,12 +75,7 @@ namespace UserManagement.Winform
                     Log.Logger.Fatal("Application Failed to Start");
                 }
             }
-
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
         }
 
-      
     }
 }

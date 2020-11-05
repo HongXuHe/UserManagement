@@ -21,18 +21,20 @@ namespace UserManagement.Winform
         private readonly IUserRepo _userRepo;
         private readonly UserManagementContext _context;
 
-        public Form1(UserManagementContext context)
+        public Form1(UserManagementContext context,IUserRepo userRepo)
         {
             
             InitializeComponent();
             _context = context;
+            _userRepo = userRepo;
         }
 
  
         private void button1_Click(object sender, EventArgs e)
         {
             Log.Information("form1{time}",DateTime.Now);
-            var list = _context.ApplicationUsers.ToList();
+            var list = _userRepo.GetList(x => true).ToList();
+            MessageBox.Show(list.Count.ToString());
         }
     }
 }
