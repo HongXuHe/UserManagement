@@ -1,0 +1,50 @@
+2020-11-04 10:21:21.974 +11:00 [INF] Application Starts at "2020-11-04T10:21:21.9673008+11:00"
+2020-11-04 10:25:02.399 +11:00 [INF] Application Starts at "2020-11-04T10:25:02.3923008+11:00"
+2020-11-04 10:35:35.890 +11:00 [INF] ***************************Application Starts***************************
+2020-11-04 16:17:00.940 +11:00 [FTL] ***************Application failed to start. please investigate***************
+System.InvalidOperationException: The property or navigation 'ApplicationUser' cannot be added to the entity type 'R_User_Role' because a property or navigation with the same name already exists on entity type 'R_User_Role'.
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.EntityType.AddNavigation(MemberIdentity propertyIdentity, ForeignKey foreignKey, Boolean pointsToPrincipal)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.EntityType.AddNavigation(MemberInfo navigationProperty, ForeignKey foreignKey, Boolean pointsToPrincipal)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKey.Navigation(Nullable`1 propertyIdentity, ConfigurationSource configurationSource, Boolean pointsToPrincipal)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKey.HasDependentToPrincipal(MemberInfo property, ConfigurationSource configurationSource)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.InternalRelationshipBuilder.HasNavigations(Nullable`1 navigationToPrincipal, Nullable`1 navigationToDependent, EntityType principalEntityType, EntityType dependentEntityType, ConfigurationSource configurationSource)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.InternalRelationshipBuilder.HasNavigations(Nullable`1 navigationToPrincipal, Nullable`1 navigationToDependent, ConfigurationSource configurationSource)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.InternalRelationshipBuilder.HasNavigation(MemberInfo property, Boolean pointsToPrincipal, ConfigurationSource configurationSource)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.InternalEntityTypeBuilder.HasRelationship(EntityType targetEntityType, Nullable`1 navigationToTarget, Nullable`1 inverseNavigation, Boolean setTargetAsPrincipal, ConfigurationSource configurationSource, Nullable`1 required)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.InternalEntityTypeBuilder.HasRelationship(EntityType targetEntityType, MemberInfo navigationProperty, ConfigurationSource configurationSource, Boolean setTargetAsPrincipal)
+   at Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder`1.HasOne[TRelatedEntity](Expression`1 navigationExpression)
+   at UserManagement.Entity.UserManagementContext.<>c.<OnModelCreating>b__1_3(EntityTypeBuilder`1 x) in F:\GitHub\UserManagement\UserManagement\UserManagement.Entity\UserManagementContext.cs:line 47
+   at Microsoft.EntityFrameworkCore.ModelBuilder.Entity[TEntity](Action`1 buildAction)
+   at UserManagement.Entity.UserManagementContext.OnModelCreating(ModelBuilder modelBuilder) in F:\GitHub\UserManagement\UserManagement\UserManagement.Entity\UserManagementContext.cs:line 44
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelCustomizer.Customize(ModelBuilder modelBuilder, DbContext context)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_3(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite singletonCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite singletonCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure<System.IServiceProvider>.get_Instance()
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.EnsureCreated()
+   at UserManagement.Entity.DbInit.InitDb(UserManagementContext context) in F:\GitHub\UserManagement\UserManagement\UserManagement.Entity\DbInit.cs:line 14
+   at UserManagement.Web.Program.Main(String[] args) in F:\GitHub\UserManagement\UserManagement\UserManagement.Web\Program.cs:line 36
+2020-11-04 16:21:00.796 +11:00 [INF] ***************Application Starts***************
