@@ -17,19 +17,18 @@ using UserManagement.IRepository;
 
 namespace UserManagement.Winform
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _ServiceProvider;
         private readonly UserManagementContext _context;
 
-        public Form1(UserManagementContext context,IUserRepo userRepo,IServiceProvider serviceProvider)
+        public MainForm(UserManagementContext context,IUserRepo userRepo,IServiceProvider serviceProvider)
         {
-            
-            InitializeComponent();
             _context = context;
             _userRepo = userRepo;
             _ServiceProvider = serviceProvider;
+            InitializeComponent();     
         }
 
  
@@ -41,6 +40,17 @@ namespace UserManagement.Winform
             var list = _userRepo.GetList(x => true).ToList();
             form.Show();
           //  MessageBox.Show(list.Count.ToString());
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            var bmp = new Bitmap(UserManagement.Winform.Properties.Resources.nwiclient);
+            this.Icon = Icon.FromHandle(bmp.GetHicon());
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -18,6 +18,7 @@ using UserManagement.IRepository;
 using UserManagement.Repository;
 using UserManagement.UnitOfWok;
 using UserManagement.Utility.AutofacModule;
+using UserManagement.Winform.Users;
 
 namespace UserManagement.Winform
 {
@@ -77,8 +78,8 @@ namespace UserManagement.Winform
                 try
                 {
                     Log.Logger.Information("Application Starts");
-                    var form1 = services.GetRequiredService<Form1>();
-                    Application.Run(form1);
+                    var login = services.GetRequiredService<Login>();
+                    Application.Run(login);
 
                 }
                 catch (Exception ex)

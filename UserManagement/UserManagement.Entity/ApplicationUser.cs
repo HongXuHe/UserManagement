@@ -54,6 +54,11 @@ namespace UserManagement.Entity
         /// user state
         /// </summary>
         public UserStatus UserState { get; set; } = UserStatus.Normal;
+
+        public int FalseLogInCount { get; set; } = 0;
+
+        public bool EmailConfirmed { get; set; } = false;
+        public DateTime? FrozenTime { get; set; }
         #endregion
 
         #region Navigation
