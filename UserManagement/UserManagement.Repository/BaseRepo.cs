@@ -69,7 +69,7 @@ namespace UserManagement.Repository
         {
             _context.Entry<TEntity>(entity).State = EntityState.Modified;
         }
-        
+
         /// <summary>
         /// entity exists
         /// </summary>
@@ -78,7 +78,7 @@ namespace UserManagement.Repository
 
         public bool Exists(Expression<Func<TEntity, bool>> whereLambda)
         {
-            return _context.Set<TEntity>().Where(e=>!e.SoftDelete).Any(whereLambda);
+            return _context.Set<TEntity>().Where(e => !e.SoftDelete).Any(whereLambda);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace UserManagement.Repository
         /// <returns></returns>
         public IQueryable<TEntity> GetList(Expression<Func<TEntity, bool>> expression)
         {
-           return _context.Set<TEntity>().Where(expression).Where(e => !e.SoftDelete);
+            return _context.Set<TEntity>().Where(expression).Where(e => !e.SoftDelete);
         }
 
         /// <summary>
@@ -134,6 +134,23 @@ namespace UserManagement.Repository
             }
             list = list.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return list;
+        }
+
+        /// <summary>
+        /// retrive all the table names from db
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        public IQueryable<string> GetDataBaseTables(Expression<Func<string, bool>> whereLambda)
+        {
+            var listTable = new List<string>();
+            var entityTypes = _context.Model.GetEntityTypes();
+            foreach (var item in entityTypes)
+            {
+                listTable.Add(item.Name);
+            }
+            return listTable.ToList().AsQueryable().Where(whereLambda);
+
         }
     }
 }

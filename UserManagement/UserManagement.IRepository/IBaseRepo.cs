@@ -82,5 +82,12 @@ namespace UserManagement.IRepository
         /// <returns></returns>
         int GetCount(Expression<Func<TEntity, bool>> whereLambda);
 
+        /// <summary>
+        /// retrive all table names in db
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        IQueryable<string> GetDataBaseTables(Expression<Func<string, bool>> whereLambda);
+
     }
 }

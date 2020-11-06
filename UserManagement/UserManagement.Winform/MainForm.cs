@@ -48,6 +48,8 @@ namespace UserManagement.Winform
             this.Icon = Icon.FromHandle(bmp.GetHicon());
             txtUser.Text = UserEmail;
             plMain.BackgroundImage = UserManagement.Winform.Properties.Resources.bg_MainWindow;
+            var btnDataSubList = _userRepo.GetDataBaseTables(x=>(!x.Contains("Role") && !x.Contains("ApplicationUser") && !x.Contains("ApplicationPermission") && !x.Contains("R_"))).ToList();
+            var btnIdentitySublist = _userRepo.GetDataBaseTables(x => ((x.Contains("ApplicationRole") || x.Contains("ApplicationUser") ||x.Contains("ApplicationPermission")) && !x.Contains("R_"))).ToList();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -65,5 +67,8 @@ namespace UserManagement.Winform
         {
              Application.Exit();
         }
+
+        #region common methods
+        #endregion
     }
 }
