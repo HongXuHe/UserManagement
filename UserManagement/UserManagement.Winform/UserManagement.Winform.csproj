@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonControls\CreateUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\CreateUserControl.Designer.cs">
+      <DependentUpon>CreateUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="Users\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CommonControls\CreateUserControl.resx">
+      <DependentUpon>CreateUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,11 +175,11 @@
       <Version>3.3.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CommonControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Images\close_24x24.png" />
+    <None Include="Resources\bg_MainWindow.jpg" />
+    <None Include="Resources\home_32x32.png" />
     <None Include="Resources\nwiclient.png" />
     <None Include="Resources\close_24x24.png" />
     <None Include="Resources\user.ico" />

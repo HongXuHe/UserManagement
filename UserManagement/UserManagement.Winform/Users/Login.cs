@@ -51,6 +51,7 @@ namespace UserManagement.Winform.Users
                     {
                         Log.Logger.Information("user {0},{1} logged in", userFromDb.UserName, userFromDb.Email);
                         var mainForm = _serviceProvider.GetRequiredService<MainForm>();
+                        mainForm.UserEmail = userEmail;
                         mainForm.Show();
                         this.Hide();
                         return;

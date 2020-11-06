@@ -41,7 +41,7 @@ namespace UserManagement.Winform
                      #region Dependency Injection
 
                      var formsAssem = Assembly.Load("UserManagement.Winform");
-                     foreach (var formType in formsAssem.GetTypes().Where(t => t.IsSubclassOf(typeof(Form))))
+                     foreach (var formType in formsAssem.GetTypes().Where(t => t.IsSubclassOf(typeof(Form)) || t.IsSubclassOf(typeof(UserControl))))
                      {
                          services.AddScoped(formType);
                      }
