@@ -41,7 +41,6 @@
             this.btnIdentity = new System.Windows.Forms.ToolStripDropDownButton();
             this.individualUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userPermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnToolbox = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportRecordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,8 +151,7 @@
             // 
             this.btnIdentity.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.individualUsersToolStripMenuItem,
-            this.userRolesToolStripMenuItem,
-            this.userPermissionsToolStripMenuItem});
+            this.userRolesToolStripMenuItem});
             this.btnIdentity.Image = ((System.Drawing.Image)(resources.GetObject("btnIdentity.Image")));
             this.btnIdentity.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnIdentity.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -165,20 +163,15 @@
             // individualUsersToolStripMenuItem
             // 
             this.individualUsersToolStripMenuItem.Name = "individualUsersToolStripMenuItem";
-            this.individualUsersToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.individualUsersToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.individualUsersToolStripMenuItem.Text = "Individual Users";
+            this.individualUsersToolStripMenuItem.Click += new System.EventHandler(this.individualUsersToolStripMenuItem_Click);
             // 
             // userRolesToolStripMenuItem
             // 
             this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
-            this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.userRolesToolStripMenuItem.Text = "User Roles";
-            // 
-            // userPermissionsToolStripMenuItem
-            // 
-            this.userPermissionsToolStripMenuItem.Name = "userPermissionsToolStripMenuItem";
-            this.userPermissionsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.userPermissionsToolStripMenuItem.Text = "User Permissions";
             // 
             // toolStripSeparator4
             // 
@@ -293,6 +286,7 @@
             this.ForeColor = System.Drawing.Color.Blue;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NWI";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -322,7 +316,6 @@
         private System.Windows.Forms.Panel plMain;
         private System.Windows.Forms.ToolStripMenuItem individualUsersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userRolesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem userPermissionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportRecordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backUpFrequencyToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox1;

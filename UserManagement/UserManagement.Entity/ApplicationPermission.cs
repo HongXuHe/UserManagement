@@ -26,8 +26,8 @@ namespace UserManagement.Entity
         #endregion
 
         #region Navigation
-        public IReadOnlyCollection<R_User_Permission> ApplicationUsers { get; set; } = new List<R_User_Permission>();
-        public IReadOnlyCollection<R_Role_Permission> ApplicationRoles { get; set; } = new List<R_Role_Permission>();
+        public ICollection<R_User_Permission> ApplicationUsers { get; set; } = new List<R_User_Permission>();
+        public ICollection<R_Role_Permission> ApplicationRoles { get; set; } = new List<R_Role_Permission>();
         #endregion
 
     }

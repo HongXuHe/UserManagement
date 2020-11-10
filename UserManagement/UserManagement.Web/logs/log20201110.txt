@@ -1,0 +1,9 @@
+2020-11-10 11:03:07.209 +11:00 [INF] ***************Application Starts***************
+2020-11-10 11:23:24.802 +11:00 [INF] ***************Application Starts***************
+2020-11-10 11:42:34.988 +11:00 [INF] ***************Application Starts***************
+2020-11-10 13:44:28.686 +11:00 [FTL] ***************Application failed to start. please investigate***************
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at UserManagement.Entity.DbInit.InitDb(UserManagementContext context) in F:\GitHub\UserManagement\UserManagement\UserManagement.Entity\DbInit.cs:line 36
+   at UserManagement.Web.Program.Main(String[] args) in F:\GitHub\UserManagement\UserManagement\UserManagement.Web\Program.cs:line 36
+2020-11-10 13:46:11.238 +11:00 [INF] ***************Application Starts***************
+2020-11-10 15:03:16.342 +11:00 [INF] ***************Application Starts***************
