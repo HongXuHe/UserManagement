@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using UserManagement.Winform.Users;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Microsoft.EntityFrameworkCore;
+using UserManagement.UnitOfWok;
 
 namespace UserManagement.Winform.CommonControls
 {
@@ -21,23 +23,20 @@ namespace UserManagement.Winform.CommonControls
     {
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider)
+        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider,IUnitOfWork unitOfWork)
         {
             _userRepo = userRepo;
             _serviceProvider = serviceProvider;
+            _unitOfWork = unitOfWork;
             InitializeComponent();
         }
 
         private void UserListControl_Load(object sender, EventArgs e)
         {
             //load all the users
-            var userFromDb = _userRepo.GetList(x => true).ToList();
-            var userList = Mapping.Mapper.Map<List<UserDto>>(userFromDb);
-            dgvUserList.DataSource = userList;
-            dgvUserList.Rows[0].Selected = false;
-            this.Dock = DockStyle.Fill;
-            dgvUserList.ClearSelection();
+            LoadDataToUserControl();
         }
 
         private void dgvUserList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -53,6 +52,7 @@ namespace UserManagement.Winform.CommonControls
 
                 var createForm = _serviceProvider.GetRequiredService<CreateUser>();
                 createForm.Email = userEmail;
+                createForm.Text = "Modify User";
                 createForm.ShowDialog();
             }
             catch (Exception ex)
@@ -61,6 +61,20 @@ namespace UserManagement.Winform.CommonControls
 
             }
 
+        }
+
+        private void dgvUserList_VisibleChanged(object sender, EventArgs e)
+        {
+            LoadDataToUserControl();
+        }
+        private void LoadDataToUserControl()
+        {
+            var userFromDb = _unitOfWork.UserRepo.GetList(x => true).ToList();
+            var userList = Mapping.Mapper.Map<List<UserDto>>(userFromDb);
+            dgvUserList.DataSource = userList;
+            dgvUserList.Rows[0].Selected = false;
+            this.Dock = DockStyle.Fill;
+            dgvUserList.ClearSelection();
         }
     }
 }

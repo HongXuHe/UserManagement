@@ -47,6 +47,7 @@
             this.dgvUserList.Size = new System.Drawing.Size(780, 496);
             this.dgvUserList.TabIndex = 0;
             this.dgvUserList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserList_CellContentDoubleClick);
+            this.dgvUserList.VisibleChanged += new System.EventHandler(this.dgvUserList_VisibleChanged);
             // 
             // UserListControl
             // 

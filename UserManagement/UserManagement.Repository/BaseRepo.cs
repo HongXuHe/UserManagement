@@ -86,7 +86,7 @@ namespace UserManagement.Repository
         /// </summary>
         /// <param name="whereLambda"></param>
         /// <returns></returns>
-        public TEntity FindSingle(Expression<Func<TEntity, bool>> whereLambda)
+        public virtual TEntity FindSingle(Expression<Func<TEntity, bool>> whereLambda)
         {
             return _context.Set<TEntity>().Where(e => !e.SoftDelete).FirstOrDefault(whereLambda);
         }

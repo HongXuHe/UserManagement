@@ -60,8 +60,6 @@ namespace UserManagement.Winform
                      };
                      #endregion
 
-
-
                      #region Logger
                      var logger = new LoggerConfiguration()
                                     .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day)

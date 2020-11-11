@@ -30,6 +30,7 @@ namespace MapperConfig
         public MappingProfile()
         {
             CreateMap<ApplicationUser, UserDto>();
+            CreateMap<UserDto, ApplicationUser>();
             CreateMap<ApplicationRole, RoleDto>();
             CreateMap<ApplicationPermission, PermissionDto>();
         }

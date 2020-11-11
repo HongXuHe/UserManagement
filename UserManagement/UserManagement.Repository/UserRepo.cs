@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using UserManagement.Entity;
 using UserManagement.IRepository;
@@ -35,6 +36,12 @@ namespace UserManagement.Repository
         public IQueryable<ApplicationRole> GetUserRoles(Guid userId)
         {
             return _context.R_User_Roles.Where(x => x.ApplicationUserId == userId).Select(x => x.ApplicationRole);
+        }
+
+        public override ApplicationUser FindSingle(Expression<Func<ApplicationUser, bool>> whereLambda)
+        {
+           return _context.ApplicationUsers.Include(x => x.ApplicationRoles).ThenInclude(y => y.ApplicationRole).Include(x => x.ApplicationPermissions).ThenInclude(z=>z.ApplicationPermission)
+                 .SingleOrDefault(whereLambda);
         }
     }
 }

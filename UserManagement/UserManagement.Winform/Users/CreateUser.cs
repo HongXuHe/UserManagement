@@ -1,4 +1,5 @@
 ﻿using MapperConfig;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,33 +12,40 @@ using System.Windows.Forms;
 using UserManagement.Dtos;
 using UserManagement.Entity;
 using UserManagement.IRepository;
+using UserManagement.UnitOfWok;
 
 namespace UserManagement.Winform.Users
 {
     public partial class CreateUser : Form
     {
         #region props and ctor
+        public bool IsCreate { get; set; }
         private readonly IUserRepo _userRepo;
         private readonly IRoleRepo _roleRepo;
         private readonly IPermissionRepo _permissionRepo;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IUnitOfWork _unitOfWork;
+        private List<string> _permissionList = new List<string>();
 
         public string Email { get; set; }
         public UserDto _user { get; set; }
-        public CreateUser(IUserRepo userRepo, IRoleRepo roleRepo, IPermissionRepo permissionRepo, IServiceProvider serviceProvider)
+        public ApplicationUser AppUser { get; set; }
+        public CreateUser(IUserRepo userRepo, IRoleRepo roleRepo, IPermissionRepo permissionRepo, IServiceProvider serviceProvider, IUnitOfWork unitOfWork)
         {
             InitializeComponent();
             _userRepo = userRepo;
             _roleRepo = roleRepo;
             _permissionRepo = permissionRepo;
             _serviceProvider = serviceProvider;
+            _unitOfWork = unitOfWork;
         }
         #endregion
 
         #region Event
         private void CreateUser_Load(object sender, EventArgs e)
         {
-            _user = Mapping.Mapper.Map<UserDto>(_userRepo.FindSingle(u => u.Email == Email));
+            AppUser = _unitOfWork.UserRepo.FindSingle(u => u.Email == Email);
+            _user = Mapping.Mapper.Map<UserDto>(AppUser);
             tabUserFrom.SelectedIndex = 0; //will not trigger selecteIndexChange event, have to call loaduser() manually
             LoadUser();
         }
@@ -73,7 +81,8 @@ namespace UserManagement.Winform.Users
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            SaveUser();
+            this.Close();
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -115,7 +124,7 @@ namespace UserManagement.Winform.Users
             //clear items first
             chcListBox.Items.Clear();
             var AllRoles = _roleRepo.GetList(x => true).ToList();
-            var userRoles = _userRepo.GetUserRoles(_userRepo.FindSingle(u => u.Email == Email).Id);
+            var userRoles = _unitOfWork.UserRepo.GetUserRoles(_userRepo.FindSingle(u => u.Email == Email).Id);
             //reload roles
             foreach (var item in AllRoles)
             {
@@ -137,9 +146,9 @@ namespace UserManagement.Winform.Users
         private void LoadPermission()
         {
             treeViewPermission.Nodes.Clear();
-            var userPermissionsFromDb = _userRepo.GetUserPermissions(_userRepo.FindSingle(u => u.Email == Email).Id).ToList();
+            var userPermissionsFromDb = _unitOfWork.UserRepo.GetUserPermissions(_userRepo.FindSingle(u => u.Email == Email).Id).ToList();
             var userPermissions = Mapping.Mapper.Map<List<PermissionDto>>(userPermissionsFromDb);
-            var firstLevelPermissionsFromDb = _permissionRepo.GetList(x => x.ParentId == null).ToList();
+            var firstLevelPermissionsFromDb = _unitOfWork.PermissionRepo.GetList(x => x.ParentId == null).ToList();
             var firstLevelPermissions = Mapping.Mapper.Map<List<PermissionDto>>(firstLevelPermissionsFromDb);
             var firstAllNode = new TreeNode("All");
             var node = AddPermissionToTreeView(firstLevelPermissions, userPermissions, firstAllNode);
@@ -163,12 +172,13 @@ namespace UserManagement.Winform.Users
                 treeNode.Nodes.Add(permission.PermissionName);
                 if (userPermissions.Any(p => p.PermissionName == permission.PermissionName))
                 {
+                    treeNode.LastNode.Checked = true;
                     treeNode.Checked = true;
                 }
                 else
                 {
-                    treeNode.Checked = false;
-                }
+                    treeNode.LastNode.Checked = false;
+                }                
                 var childPermissions = Mapping.Mapper.Map<List<PermissionDto>>(_permissionRepo.GetList(p => p.ParentId == permission.Id.ToString()).ToList());
                 AddPermissionToTreeView(childPermissions, userPermissions, treeNode.LastNode);
             }
@@ -188,10 +198,99 @@ namespace UserManagement.Winform.Users
                 if (item.Nodes.Count > 0)
                 {
                     this.CheckTreeViewNode(item, item.Checked);
+                    if (!_permissionList.Contains(item.Text) && item.Checked)
+                    {
+                        _permissionList.Add(item.Text);
+                    }
+                    else
+                    {
+                        _permissionList.Remove(item.Text);
+                    }
+
+                }
+                if (!_permissionList.Contains(item.Text) && item.Checked)
+                {
+                    _permissionList.Add(item.Text);
+                }
+                else
+                {
+                    _permissionList.Remove(item.Text);
                 }
             }
         }
+
+        private void SaveUser()
+        {
+            if (AppUser != null)
+            {
+                SetModifiedValueToUser();
+                //make sure unique email and its used by current user
+                if (_unitOfWork.UserRepo.GetCount(u => u.Email == _user.Email) == 1 && _unitOfWork.UserRepo.FindSingle(x => x.Email == _user.Email).Id == _user.Id)
+                {
+                    _unitOfWork.UserRepo.Edit(AppUser);
+                    try
+                    {
+                        _unitOfWork.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Error occured, please check your input information.eg:unique email");
+                }
+
+            }
+        }
+
+        private void SetModifiedValueToUser()
+        {
+            AppUser.UserName = txtUserName.Text.Trim();
+            AppUser.Email = txtEmail.Text.Trim();
+            AppUser.PhoneNo = txtPhone.Text.Trim();
+            AppUser.Description = txtDesc.Text.Trim();
+            AppUser.EffectDate = dtEffectDate.Value;
+            if (dtExpireDate.Value != dtExpireDate.MaxDate)
+            {
+                AppUser.ExpireDate = dtExpireDate.Value;
+            }
+            // add selected roles
+            var roleList = new List<R_User_Role>();
+            foreach (ApplicationRole role in chcListBox.Items)
+            {
+                if (chcListBox.CheckedItems.Contains(role))
+                {
+                    roleList.Add(new R_User_Role() { ApplicationRoleId = role.Id });
+                }
+                else
+                {
+                    roleList.Remove(new R_User_Role() { ApplicationRoleId =role.Id});
+                }
+                AppUser.ApplicationRoles = roleList;
+            }
+            ////add selected permissions
+            var permissionList = new List<R_User_Permission>();
+            foreach (var permission in _unitOfWork.PermissionRepo.GetList(x => true).ToList())
+            {
+
+                // var permissionFromDb = _unitOfWork.PermissionRepo.FindSingle(x => x.PermissionName == permission.PermissionName);
+                if (_permissionList.Contains(permission.PermissionName))
+                {
+                    permissionList.Add(new R_User_Permission() { ApplicationPermissionId = permission.Id });
+                }
+                else
+                {
+                    permissionList.Remove(new R_User_Permission() { ApplicationPermissionId = permission.Id });
+                }
+
+            }
+            AppUser.ApplicationPermissions = permissionList;
+        }
         #endregion
-      
+
     }
 }

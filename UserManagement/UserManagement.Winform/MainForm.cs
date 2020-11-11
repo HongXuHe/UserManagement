@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using UserManagement.Entity;
 using UserManagement.IRepository;
 using UserManagement.Winform.CommonControls;
+using UserManagement.Winform.Users;
 
 namespace UserManagement.Winform
 {
@@ -81,9 +82,16 @@ namespace UserManagement.Winform
         /// <param name="e"></param>
         private void individualUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           var userListControl = _ServiceProvider.GetRequiredService<UserListControl>();
-            plMain.Controls.Clear();
+             var userListControl = _ServiceProvider.GetRequiredService<UserListControl>();
+            //var userListControl = new UserListControl(null, null, null);
             plMain.Controls.Add(userListControl);
+        }
+
+        private void createUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createUser = _ServiceProvider.GetRequiredService<CreateUser>();
+            createUser.IsCreate = true;
+            createUser.ShowDialog();
         }
     }
 }

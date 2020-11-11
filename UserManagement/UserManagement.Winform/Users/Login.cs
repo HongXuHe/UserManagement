@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserManagement.IRepository;
+using UserManagement.UnitOfWok;
 using UserManagement.Utility;
 using UserManagement.Utility.Winform;
 
@@ -20,11 +21,13 @@ namespace UserManagement.Winform.Users
         #region ctor and props
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public Login(IUserRepo userRepo, IServiceProvider serviceProvider)
+        public Login(IUserRepo userRepo, IServiceProvider serviceProvider,IUnitOfWork unitOfWork)
         {
             _userRepo = userRepo;
             _serviceProvider = serviceProvider;
+            _unitOfWork = unitOfWork;
             InitializeComponent();
         } 
         #endregion
@@ -45,7 +48,7 @@ namespace UserManagement.Winform.Users
                 // user exists
                 if (_userRepo.Exists(u => u.Email == userEmail))
                 {
-                    var userFromDb = _userRepo.FindSingle(u => u.Email == userEmail);
+                    var userFromDb = _unitOfWork.UserRepo.FindSingle(u => u.Email == userEmail);
                     var hashInputPwd = Md5Encrypt.GetMD5Hash(string.Concat(userFromDb.PasswordSalt, userPassword));
                     if (userFromDb.Password.Equals(hashInputPwd))
                     {

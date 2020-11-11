@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UserManagement.IRepository;
+using UserManagement.UnitOfWok;
 using UserManagement.Web.Models;
 
 namespace UserManagement.Web.Controllers
@@ -14,16 +15,20 @@ namespace UserManagement.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserRepo _userRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger,IUserRepo userRepo)
+        public HomeController(ILogger<HomeController> logger,IUserRepo userRepo,IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _userRepo = userRepo;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-           var list = _userRepo.GetList(x => true).ToList();
+            var user = _unitOfWork.UserRepo.FindSingle(x => x.Email == "Matt@gmail.com");
+            user.UserName = "matt";
+            _unitOfWork.SaveChanges();
             return View();
         }
 
