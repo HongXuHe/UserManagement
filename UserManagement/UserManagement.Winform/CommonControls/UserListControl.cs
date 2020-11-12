@@ -25,7 +25,7 @@ namespace UserManagement.Winform.CommonControls
         private readonly IServiceProvider _serviceProvider;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider,IUnitOfWork unitOfWork)
+        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider, IUnitOfWork unitOfWork)
         {
             _userRepo = userRepo;
             _serviceProvider = serviceProvider;
@@ -48,12 +48,14 @@ namespace UserManagement.Winform.CommonControls
             try
             {
                 DataGridViewRow dataGridViewRow = dgvUserList.Rows[e.RowIndex];
-                var userEmail = dataGridViewRow.Cells["Email"].Value.ToString();
+                var userId = dataGridViewRow.Cells["Id"].Value.ToString();
 
                 var createForm = _serviceProvider.GetRequiredService<CreateUser>();
-                createForm.Email = userEmail;
+                createForm.Id = userId;
                 createForm.Text = "Modify User";
-                createForm.ShowDialog();
+                var dialogRes = createForm.ShowDialog();
+                LoadDataToUserControl();
+
             }
             catch (Exception ex)
             {
@@ -69,8 +71,9 @@ namespace UserManagement.Winform.CommonControls
         }
         private void LoadDataToUserControl()
         {
-            var userFromDb = _unitOfWork.UserRepo.GetList(x => true).ToList();
+            var userFromDb = _userRepo.GetList(x => true).ToList();
             var userList = Mapping.Mapper.Map<List<UserDto>>(userFromDb);
+            dgvUserList.DataSource = null;
             dgvUserList.DataSource = userList;
             dgvUserList.Rows[0].Selected = false;
             this.Dock = DockStyle.Fill;

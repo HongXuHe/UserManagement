@@ -27,24 +27,24 @@ namespace UserManagement.Winform.Users
         private readonly IUnitOfWork _unitOfWork;
         private List<string> _permissionList = new List<string>();
 
-        public string Email { get; set; }
+        public string Id { get; set; }
         public UserDto _user { get; set; }
         public ApplicationUser AppUser { get; set; }
         public CreateUser(IUserRepo userRepo, IRoleRepo roleRepo, IPermissionRepo permissionRepo, IServiceProvider serviceProvider, IUnitOfWork unitOfWork)
-        {
-            InitializeComponent();
+        {            
             _userRepo = userRepo;
             _roleRepo = roleRepo;
             _permissionRepo = permissionRepo;
             _serviceProvider = serviceProvider;
             _unitOfWork = unitOfWork;
+            InitializeComponent();
         }
         #endregion
 
         #region Event
         private void CreateUser_Load(object sender, EventArgs e)
         {
-            AppUser = _unitOfWork.UserRepo.FindSingle(u => u.Email == Email);
+            AppUser = _unitOfWork.UserRepo.FindSingle(u => u.Id.ToString() == Id);
             _user = Mapping.Mapper.Map<UserDto>(AppUser);
             tabUserFrom.SelectedIndex = 0; //will not trigger selecteIndexChange event, have to call loaduser() manually
             LoadUser();
@@ -124,7 +124,7 @@ namespace UserManagement.Winform.Users
             //clear items first
             chcListBox.Items.Clear();
             var AllRoles = _roleRepo.GetList(x => true).ToList();
-            var userRoles = _unitOfWork.UserRepo.GetUserRoles(_userRepo.FindSingle(u => u.Email == Email).Id);
+            var userRoles = _unitOfWork.UserRepo.GetUserRoles(_userRepo.FindSingle(u => u.Id.ToString() == Id).Id);
             //reload roles
             foreach (var item in AllRoles)
             {
@@ -146,7 +146,7 @@ namespace UserManagement.Winform.Users
         private void LoadPermission()
         {
             treeViewPermission.Nodes.Clear();
-            var userPermissionsFromDb = _unitOfWork.UserRepo.GetUserPermissions(_userRepo.FindSingle(u => u.Email == Email).Id).ToList();
+            var userPermissionsFromDb = _unitOfWork.UserRepo.GetUserPermissions(_userRepo.FindSingle(u => u.Id.ToString() == Id).Id).ToList();
             var userPermissions = Mapping.Mapper.Map<List<PermissionDto>>(userPermissionsFromDb);
             var firstLevelPermissionsFromDb = _unitOfWork.PermissionRepo.GetList(x => x.ParentId == null).ToList();
             var firstLevelPermissions = Mapping.Mapper.Map<List<PermissionDto>>(firstLevelPermissionsFromDb);
@@ -178,7 +178,7 @@ namespace UserManagement.Winform.Users
                 else
                 {
                     treeNode.LastNode.Checked = false;
-                }                
+                }
                 var childPermissions = Mapping.Mapper.Map<List<PermissionDto>>(_permissionRepo.GetList(p => p.ParentId == permission.Id.ToString()).ToList());
                 AddPermissionToTreeView(childPermissions, userPermissions, treeNode.LastNode);
             }
@@ -192,30 +192,21 @@ namespace UserManagement.Winform.Users
         /// <param name="isChecked">is parent node checked</param>
         private void CheckTreeViewNode(TreeNode node, bool isChecked)
         {
+            //var tableList =_userRepo.GetDataBaseTables(x => true).Select(x => x.Substring(22)).ToList();
+            if (node.Nodes.Count == 0)
+            {
+                PermissionListAddRemove(node);
+            }
             foreach (TreeNode item in node.Nodes)
             {
                 item.Checked = isChecked;
                 if (item.Nodes.Count > 0)
                 {
                     this.CheckTreeViewNode(item, item.Checked);
-                    if (!_permissionList.Contains(item.Text) && item.Checked)
-                    {
-                        _permissionList.Add(item.Text);
-                    }
-                    else
-                    {
-                        _permissionList.Remove(item.Text);
-                    }
+                   // PermissionListAddRemove(item);
+                }
+                PermissionListAddRemove(item);
 
-                }
-                if (!_permissionList.Contains(item.Text) && item.Checked)
-                {
-                    _permissionList.Add(item.Text);
-                }
-                else
-                {
-                    _permissionList.Remove(item.Text);
-                }
             }
         }
 
@@ -223,10 +214,13 @@ namespace UserManagement.Winform.Users
         {
             if (AppUser != null)
             {
-                SetModifiedValueToUser();
+
                 //make sure unique email and its used by current user
-                if (_unitOfWork.UserRepo.GetCount(u => u.Email == _user.Email) == 1 && _unitOfWork.UserRepo.FindSingle(x => x.Email == _user.Email).Id == _user.Id)
+                if (_unitOfWork.UserRepo.GetCount(u => u.Email == txtEmail.Text.Trim()) < 1
+                    || (_unitOfWork.UserRepo.GetCount(u => u.Email == txtEmail.Text.Trim()) == 1 && AppUser.Email ==txtEmail.Text.Trim())
+                    )
                 {
+                    SetModifiedValueToUser();
                     _unitOfWork.UserRepo.Edit(AppUser);
                     try
                     {
@@ -237,11 +231,12 @@ namespace UserManagement.Winform.Users
 
                         throw;
                     }
-                   
+
                 }
                 else
                 {
                     MessageBox.Show("Error occured, please check your input information.eg:unique email");
+                    return;
                 }
 
             }
@@ -268,7 +263,7 @@ namespace UserManagement.Winform.Users
                 }
                 else
                 {
-                    roleList.Remove(new R_User_Role() { ApplicationRoleId =role.Id});
+                    roleList.Remove(new R_User_Role() { ApplicationRoleId = role.Id });
                 }
                 AppUser.ApplicationRoles = roleList;
             }
@@ -289,6 +284,33 @@ namespace UserManagement.Winform.Users
 
             }
             AppUser.ApplicationPermissions = permissionList;
+        }
+
+        /// <summary>
+        /// permission list add/remove to field in _permissionList
+        /// </summary>
+        /// <param name="node"></param>
+        private void PermissionListAddRemove(TreeNode node)
+        {
+            if (node.Nodes.Count == 0)
+            {
+                if (!_permissionList.Contains(node.Text))
+                {
+                    if (node.Checked)
+                    {
+                        _permissionList.Add(node.Text);
+                    }
+
+                }
+                else
+                {
+                    if (!node.Checked)
+                    {
+                        _permissionList.Remove(node.Text);
+                    }
+
+                }
+            }
         }
         #endregion
 
