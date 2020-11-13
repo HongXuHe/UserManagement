@@ -50,13 +50,19 @@ namespace UserManagement.Winform.Users
                 {
                     var userFromDb = _unitOfWork.UserRepo.FindSingle(u => u.Email == userEmail);
                     var hashInputPwd = Md5Encrypt.GetMD5Hash(string.Concat(userFromDb.PasswordSalt, userPassword));
-                    if (userFromDb.Password.Equals(hashInputPwd))
+                    if (userFromDb.Password ==hashInputPwd)
                     {
                         Log.Logger.Information("user {0},{1} logged in", userFromDb.UserName, userFromDb.Email);
                         var mainForm = _serviceProvider.GetRequiredService<MainForm>();
                         mainForm.UserEmail = userEmail;
                         mainForm.Show();
                         this.Hide();
+                        return;
+                    }
+                    else
+                    {
+                        Log.Logger.Error("user {0} try to login failed", userFromDb.Email);
+                        MessageBox.Show("Password not correct");
                         return;
                     }
                 }

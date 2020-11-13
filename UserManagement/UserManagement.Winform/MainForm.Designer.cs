@@ -40,6 +40,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnIdentity = new System.Windows.Forms.ToolStripDropDownButton();
             this.individualUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnToolbox = new System.Windows.Forms.ToolStripDropDownButton();
@@ -52,7 +53,6 @@
             this.txtUser = new System.Windows.Forms.ToolStripLabel();
             this.plMain = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.createUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,8 +166,15 @@
             // 
             this.individualUsersToolStripMenuItem.Name = "individualUsersToolStripMenuItem";
             this.individualUsersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.individualUsersToolStripMenuItem.Text = "Individual Users";
+            this.individualUsersToolStripMenuItem.Text = "UserList";
             this.individualUsersToolStripMenuItem.Click += new System.EventHandler(this.individualUsersToolStripMenuItem_Click);
+            // 
+            // createUserToolStripMenuItem
+            // 
+            this.createUserToolStripMenuItem.Name = "createUserToolStripMenuItem";
+            this.createUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createUserToolStripMenuItem.Text = "Create User";
+            this.createUserToolStripMenuItem.Click += new System.EventHandler(this.createUserToolStripMenuItem_Click);
             // 
             // userRolesToolStripMenuItem
             // 
@@ -274,13 +281,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(784, 20);
             this.textBox1.TabIndex = 3;
-            // 
-            // createUserToolStripMenuItem
-            // 
-            this.createUserToolStripMenuItem.Name = "createUserToolStripMenuItem";
-            this.createUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.createUserToolStripMenuItem.Text = "Create User";
-            this.createUserToolStripMenuItem.Click += new System.EventHandler(this.createUserToolStripMenuItem_Click);
             // 
             // MainForm
             // 

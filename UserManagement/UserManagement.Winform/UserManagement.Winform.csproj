@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonClass\PermissionToTreeView.cs" />
     <Compile Include="CommonControls\SearchControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +88,12 @@
     </Compile>
     <Compile Include="ShowMessage.Designer.cs">
       <DependentUpon>ShowMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\CreateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\CreateUser.Designer.cs">
+      <DependentUpon>CreateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\ModifyUser.cs">
       <SubType>Form</SubType>
@@ -125,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ShowMessage.resx">
       <DependentUpon>ShowMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\CreateUser.resx">
+      <DependentUpon>CreateUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\ModifyUser.resx">
       <DependentUpon>ModifyUser.cs</DependentUpon>
