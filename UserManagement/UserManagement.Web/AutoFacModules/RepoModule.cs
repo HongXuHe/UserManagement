@@ -16,7 +16,7 @@ namespace UserManagement.Web.AutoFacModules
             var assemRepo = Assembly.Load("UserManagement.Repository");            
             builder.RegisterAssemblyTypes(assemRepo).Where(t => t.Name.EndsWith("Repo") && t.Name != "BaseRepo")
                 .AsImplementedInterfaces();
-            builder.RegisterType(typeof(UnitOfWork)).As<IUnitOfWork>();
+            builder.RegisterType(typeof(UnitOfWork)).As<IUnitOfWork.IUnitOfWork>();
         }
     }
 }

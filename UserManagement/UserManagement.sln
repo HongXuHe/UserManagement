@@ -35,7 +35,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Winform", "U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06_Mapper", "06_Mapper", "{6CBA010E-522A-406D-89FE-352E84FD1BB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapperConfig", "MapperConfig\MapperConfig.csproj", "{1373084A-1634-441D-AC73-E4527BF7BACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapperConfig", "MapperConfig\MapperConfig.csproj", "{1373084A-1634-441D-AC73-E4527BF7BACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.IUnitOfWork", "UserManagement.IUnitOfWork\UserManagement.IUnitOfWork.csproj", "{034AB308-DAB9-41BC-9631-86ADC4B87D50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,10 @@ Global
 		{1373084A-1634-441D-AC73-E4527BF7BACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1373084A-1634-441D-AC73-E4527BF7BACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1373084A-1634-441D-AC73-E4527BF7BACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{034AB308-DAB9-41BC-9631-86ADC4B87D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034AB308-DAB9-41BC-9631-86ADC4B87D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034AB308-DAB9-41BC-9631-86ADC4B87D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034AB308-DAB9-41BC-9631-86ADC4B87D50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{6AC0B24C-360D-4129-827E-BE11F2655E49} = {F5A75010-595E-4D4F-B5A0-B4EB2249DDC3}
 		{79C8C3FC-3830-4884-97F6-B8858BDA7563} = {EFBE7570-A3B3-40B6-9FC3-939645A9286B}
 		{1373084A-1634-441D-AC73-E4527BF7BACB} = {6CBA010E-522A-406D-89FE-352E84FD1BB8}
+		{034AB308-DAB9-41BC-9631-86ADC4B87D50} = {8B3A0949-452A-4A55-8BA9-D3E43F95727F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E275702A-8C14-4E0F-BF6E-209C4AFF7DDE}

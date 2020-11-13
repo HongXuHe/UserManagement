@@ -89,9 +89,9 @@ namespace UserManagement.Winform
 
         private void createUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createUser = _ServiceProvider.GetRequiredService<CreateUser>();
-            createUser.IsCreate = true;
-            createUser.ShowDialog();
+            //var createUser = _ServiceProvider.GetRequiredService<CreateUser>();
+
+            //createUser.ShowDialog();
         }
     }
 }

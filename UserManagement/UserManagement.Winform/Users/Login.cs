@@ -21,9 +21,9 @@ namespace UserManagement.Winform.Users
         #region ctor and props
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork.IUnitOfWork _unitOfWork;
 
-        public Login(IUserRepo userRepo, IServiceProvider serviceProvider,IUnitOfWork unitOfWork)
+        public Login(IUserRepo userRepo, IServiceProvider serviceProvider,IUnitOfWork.IUnitOfWork unitOfWork)
         {
             _userRepo = userRepo;
             _serviceProvider = serviceProvider;

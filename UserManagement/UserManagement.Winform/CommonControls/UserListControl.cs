@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using UserManagement.UnitOfWok;
+using UserManagement.IUnitOfWork;
 
 namespace UserManagement.Winform.CommonControls
 {
@@ -23,9 +24,9 @@ namespace UserManagement.Winform.CommonControls
     {
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork.IUnitOfWork _unitOfWork;
 
-        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider, IUnitOfWork unitOfWork)
+        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider, IUnitOfWork.IUnitOfWork unitOfWork)
         {
             _userRepo = userRepo;
             _serviceProvider = serviceProvider;
@@ -50,10 +51,9 @@ namespace UserManagement.Winform.CommonControls
                 DataGridViewRow dataGridViewRow = dgvUserList.Rows[e.RowIndex];
                 var userId = dataGridViewRow.Cells["Id"].Value.ToString();
 
-                var createForm = _serviceProvider.GetRequiredService<CreateUser>();
-                createForm.Id = userId;
-                createForm.Text = "Modify User";
-                var dialogRes = createForm.ShowDialog();
+                var modifyForm = _serviceProvider.GetRequiredService<ModifyUser>();
+                modifyForm.Id = userId;
+                var dialogRes = modifyForm.ShowDialog();               
                 LoadDataToUserControl();
 
             }

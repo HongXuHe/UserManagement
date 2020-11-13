@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserManagement.Entity;
 using UserManagement.IRepository;
-using UserManagement.Repository;
 using UserManagement.UnitOfWok;
 using UserManagement.Utility.AutofacModule;
 using UserManagement.Winform.Users;
@@ -45,7 +44,7 @@ namespace UserManagement.Winform
                      {
                          services.AddScoped(formType);
                      }
-                     services.AddScoped<IUnitOfWork, UnitOfWok.UnitOfWork>();
+                     services.AddScoped<IUnitOfWork.IUnitOfWork, UnitOfWok.UnitOfWork>();
                      var assIRepos = Assembly.Load("UserManagement.IRepository");
                      var assRepos = Assembly.Load("UserManagement.Repository");
                      foreach (var itype in assIRepos.GetTypes().Where(t => t.IsInterface && !t.IsGenericType))

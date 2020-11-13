@@ -15,9 +15,9 @@ namespace UserManagement.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserRepo _userRepo;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork.IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger,IUserRepo userRepo,IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger,IUserRepo userRepo,IUnitOfWork.IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _userRepo = userRepo;

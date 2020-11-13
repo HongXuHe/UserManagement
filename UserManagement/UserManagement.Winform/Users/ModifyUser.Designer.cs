@@ -1,6 +1,6 @@
 ﻿namespace UserManagement.Winform.Users
 {
-    partial class CreateUser
+    partial class ModifyUser
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateUser));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModifyUser));
             this.tabUserFrom = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
+            this.btnResetPwd = new System.Windows.Forms.Button();
+            this.dtExpireDate = new System.Windows.Forms.DateTimePicker();
+            this.dtEffectDate = new System.Windows.Forms.DateTimePicker();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtDesc = new System.Windows.Forms.TextBox();
@@ -44,10 +47,8 @@
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.lblUserName = new System.Windows.Forms.Label();
             this.tabRole = new System.Windows.Forms.TabPage();
-            this.tabPermission = new System.Windows.Forms.TabPage();
-            this.dtEffectDate = new System.Windows.Forms.DateTimePicker();
-            this.dtExpireDate = new System.Windows.Forms.DateTimePicker();
             this.chcListBox = new System.Windows.Forms.CheckedListBox();
+            this.tabPermission = new System.Windows.Forms.TabPage();
             this.treeViewPermission = new System.Windows.Forms.TreeView();
             this.tabUserFrom.SuspendLayout();
             this.tabUser.SuspendLayout();
@@ -66,11 +67,11 @@
             this.tabUserFrom.SelectedIndex = 0;
             this.tabUserFrom.Size = new System.Drawing.Size(690, 450);
             this.tabUserFrom.TabIndex = 0;
-            this.tabUserFrom.SelectedIndexChanged += new System.EventHandler(this.tabUserFrom_SelectedIndexChanged);
             // 
             // tabUser
             // 
             this.tabUser.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabUser.Controls.Add(this.btnResetPwd);
             this.tabUser.Controls.Add(this.dtExpireDate);
             this.tabUser.Controls.Add(this.dtEffectDate);
             this.tabUser.Controls.Add(this.btnCancel);
@@ -87,17 +88,48 @@
             this.tabUser.Controls.Add(this.lblUserName);
             this.tabUser.Location = new System.Drawing.Point(4, 22);
             this.tabUser.Name = "tabUser";
-            this.tabUser.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabUser.Padding = new System.Windows.Forms.Padding(3);
             this.tabUser.Size = new System.Drawing.Size(682, 424);
             this.tabUser.TabIndex = 0;
             this.tabUser.Text = "User";
             // 
+            // btnResetPwd
+            // 
+            this.btnResetPwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetPwd.Location = new System.Drawing.Point(23, 347);
+            this.btnResetPwd.Name = "btnResetPwd";
+            this.btnResetPwd.Size = new System.Drawing.Size(151, 40);
+            this.btnResetPwd.TabIndex = 18;
+            this.btnResetPwd.Text = "ResetPassword";
+            this.btnResetPwd.UseVisualStyleBackColor = true;
+            this.btnResetPwd.Click += new System.EventHandler(this.btnResetPwd_Click);
+            // 
+            // dtExpireDate
+            // 
+            this.dtExpireDate.CustomFormat = "";
+            this.dtExpireDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtExpireDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtExpireDate.Location = new System.Drawing.Point(502, 86);
+            this.dtExpireDate.Name = "dtExpireDate";
+            this.dtExpireDate.Size = new System.Drawing.Size(135, 29);
+            this.dtExpireDate.TabIndex = 15;
+            // 
+            // dtEffectDate
+            // 
+            this.dtEffectDate.CustomFormat = "";
+            this.dtEffectDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtEffectDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtEffectDate.Location = new System.Drawing.Point(504, 35);
+            this.dtEffectDate.Name = "dtEffectDate";
+            this.dtEffectDate.Size = new System.Drawing.Size(135, 29);
+            this.dtEffectDate.TabIndex = 14;
+            // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(380, 347);
+            this.btnCancel.Location = new System.Drawing.Point(476, 347);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(101, 40);
+            this.btnCancel.Size = new System.Drawing.Size(132, 40);
             this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -106,9 +138,9 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(172, 347);
+            this.btnSave.Location = new System.Drawing.Point(235, 347);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(101, 40);
+            this.btnSave.Size = new System.Drawing.Size(155, 40);
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -211,42 +243,12 @@
             // 
             this.tabRole.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tabRole.Controls.Add(this.chcListBox);
-            this.tabRole.Location = new System.Drawing.Point(4, 33);
+            this.tabRole.Location = new System.Drawing.Point(4, 22);
             this.tabRole.Name = "tabRole";
-            this.tabRole.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabRole.Size = new System.Drawing.Size(682, 413);
+            this.tabRole.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRole.Size = new System.Drawing.Size(682, 424);
             this.tabRole.TabIndex = 1;
             this.tabRole.Text = "Roles";
-            // 
-            // tabPermission
-            // 
-            this.tabPermission.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tabPermission.Controls.Add(this.treeViewPermission);
-            this.tabPermission.Location = new System.Drawing.Point(4, 33);
-            this.tabPermission.Name = "tabPermission";
-            this.tabPermission.Size = new System.Drawing.Size(682, 413);
-            this.tabPermission.TabIndex = 2;
-            this.tabPermission.Text = "Permissions";
-            // 
-            // dtEffectDate
-            // 
-            this.dtEffectDate.CustomFormat = "";
-            this.dtEffectDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtEffectDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtEffectDate.Location = new System.Drawing.Point(504, 35);
-            this.dtEffectDate.Name = "dtEffectDate";
-            this.dtEffectDate.Size = new System.Drawing.Size(135, 29);
-            this.dtEffectDate.TabIndex = 14;
-            // 
-            // dtExpireDate
-            // 
-            this.dtExpireDate.CustomFormat = "";
-            this.dtExpireDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtExpireDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtExpireDate.Location = new System.Drawing.Point(502, 86);
-            this.dtExpireDate.Name = "dtExpireDate";
-            this.dtExpireDate.Size = new System.Drawing.Size(135, 29);
-            this.dtExpireDate.TabIndex = 15;
             // 
             // chcListBox
             // 
@@ -255,8 +257,18 @@
             this.chcListBox.FormattingEnabled = true;
             this.chcListBox.Location = new System.Drawing.Point(3, 3);
             this.chcListBox.Name = "chcListBox";
-            this.chcListBox.Size = new System.Drawing.Size(676, 407);
+            this.chcListBox.Size = new System.Drawing.Size(676, 418);
             this.chcListBox.TabIndex = 0;
+            // 
+            // tabPermission
+            // 
+            this.tabPermission.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPermission.Controls.Add(this.treeViewPermission);
+            this.tabPermission.Location = new System.Drawing.Point(4, 22);
+            this.tabPermission.Name = "tabPermission";
+            this.tabPermission.Size = new System.Drawing.Size(682, 424);
+            this.tabPermission.TabIndex = 2;
+            this.tabPermission.Text = "Permissions";
             // 
             // treeViewPermission
             // 
@@ -266,20 +278,20 @@
             this.treeViewPermission.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeViewPermission.Location = new System.Drawing.Point(0, 0);
             this.treeViewPermission.Name = "treeViewPermission";
-            this.treeViewPermission.Size = new System.Drawing.Size(682, 413);
+            this.treeViewPermission.Size = new System.Drawing.Size(682, 424);
             this.treeViewPermission.TabIndex = 0;
             this.treeViewPermission.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewPermission_AfterCheck);
             // 
-            // CreateUser
+            // ModifyUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 450);
             this.Controls.Add(this.tabUserFrom);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "CreateUser";
+            this.Name = "ModifyUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CreateUser";
+            this.Text = "ModifyUser";
             this.Load += new System.EventHandler(this.CreateUser_Load);
             this.tabUserFrom.ResumeLayout(false);
             this.tabUser.ResumeLayout(false);
@@ -312,5 +324,6 @@
         private System.Windows.Forms.DateTimePicker dtExpireDate;
         private System.Windows.Forms.CheckedListBox chcListBox;
         private System.Windows.Forms.TreeView treeViewPermission;
+        private System.Windows.Forms.Button btnResetPwd;
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
 using UserManagement.Entity;
 using UserManagement.IRepository;
+using UserManagement.IUnitOfWork;
+using UserManagement.Repository;
 
 namespace UserManagement.UnitOfWok
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork.IUnitOfWork
     {
         private readonly UserManagementContext _context;
         public IUserRepo UserRepo { get; }
@@ -24,6 +26,11 @@ namespace UserManagement.UnitOfWok
         public int SaveChanges()
         {
             return _context.SaveChanges();
+        }
+
+        public IBaseRepo<T> GetBaseRepo<T>() where T : BaseEntity, new()
+        {
+            return new BaseRepo<T>(_context);
         }
     }
 }

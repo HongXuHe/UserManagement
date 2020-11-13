@@ -88,17 +88,23 @@
     <Compile Include="ShowMessage.Designer.cs">
       <DependentUpon>ShowMessage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\CreateUser.cs">
+    <Compile Include="Users\ModifyUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users\CreateUser.Designer.cs">
-      <DependentUpon>CreateUser.cs</DependentUpon>
+    <Compile Include="Users\ModifyUser.Designer.cs">
+      <DependentUpon>ModifyUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Users\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\ResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\ResetPassword.Designer.cs">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="CommonControls\SearchControl.resx">
       <DependentUpon>SearchControl.cs</DependentUpon>
@@ -120,11 +126,14 @@
     <EmbeddedResource Include="ShowMessage.resx">
       <DependentUpon>ShowMessage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\CreateUser.resx">
-      <DependentUpon>CreateUser.cs</DependentUpon>
+    <EmbeddedResource Include="Users\ModifyUser.resx">
+      <DependentUpon>ModifyUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\ResetPassword.resx">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -156,9 +165,9 @@
       <Project>{3F44AF65-1085-458D-9116-B88EE04E0DA8}</Project>
       <Name>UserManagement.IRepository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserManagement.Repository\UserManagement.Repository.csproj">
-      <Project>{9cee1192-a549-406e-a0f6-b8842de213ad}</Project>
-      <Name>UserManagement.Repository</Name>
+    <ProjectReference Include="..\UserManagement.IUnitOfWork\UserManagement.IUnitOfWork.csproj">
+      <Project>{034AB308-DAB9-41BC-9631-86ADC4B87D50}</Project>
+      <Name>UserManagement.IUnitOfWork</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserManagement.UnitOfWok\UserManagement.UnitOfWok.csproj">
       <Project>{432c88d7-3a6a-42fd-9f0a-fd99b906c927}</Project>

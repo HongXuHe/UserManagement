@@ -7,6 +7,8 @@
   <ItemGroup>
     <ProjectReference Include="..\UserManagement.Entity\UserManagement.Entity.csproj" />
     <ProjectReference Include="..\UserManagement.IRepository\UserManagement.IRepository.csproj" />
+    <ProjectReference Include="..\UserManagement.IUnitOfWork\UserManagement.IUnitOfWork.csproj" />
+    <ProjectReference Include="..\UserManagement.Repository\UserManagement.Repository.csproj" />
   </ItemGroup>
 
 </Project>

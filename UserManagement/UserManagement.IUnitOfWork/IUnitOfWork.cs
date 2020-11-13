@@ -4,9 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UserManagement.IRepository;
 
-namespace UserManagement.UnitOfWok
+namespace UserManagement.IUnitOfWork
 {
-    public interface IUnitOfWork
+      public interface IUnitOfWork
     {
         IUserRepo UserRepo { get; }
         IPermissionRepo PermissionRepo { get; }
