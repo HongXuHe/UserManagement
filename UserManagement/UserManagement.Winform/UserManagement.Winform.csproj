@@ -52,6 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonClass\PermissionToTreeView.cs" />
+    <Compile Include="CommonControls\RoleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\RoleListControl.Designer.cs">
+      <DependentUpon>RoleListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommonControls\SearchControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -83,6 +89,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Roles\CreateRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Roles\CreateRole.Designer.cs">
+      <DependentUpon>CreateRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Roles\ModifyRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Roles\ModifyRole.Designer.cs">
+      <DependentUpon>ModifyRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowMessage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +131,9 @@
     <Compile Include="Users\ResetPassword.Designer.cs">
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CommonControls\RoleListControl.resx">
+      <DependentUpon>RoleListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommonControls\SearchControl.resx">
       <DependentUpon>SearchControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +150,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Roles\CreateRole.resx">
+      <DependentUpon>CreateRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Roles\ModifyRole.resx">
+      <DependentUpon>ModifyRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowMessage.resx">
       <DependentUpon>ShowMessage.cs</DependentUpon>
@@ -178,6 +205,10 @@
     <ProjectReference Include="..\UserManagement.IUnitOfWork\UserManagement.IUnitOfWork.csproj">
       <Project>{034AB308-DAB9-41BC-9631-86ADC4B87D50}</Project>
       <Name>UserManagement.IUnitOfWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Repository\UserManagement.Repository.csproj">
+      <Project>{9CEE1192-A549-406E-A0F6-B8842DE213AD}</Project>
+      <Name>UserManagement.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserManagement.UnitOfWok\UserManagement.UnitOfWok.csproj">
       <Project>{432c88d7-3a6a-42fd-9f0a-fd99b906c927}</Project>

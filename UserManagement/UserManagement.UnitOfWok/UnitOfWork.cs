@@ -11,12 +11,14 @@ namespace UserManagement.UnitOfWok
         private readonly UserManagementContext _context;
         public IUserRepo UserRepo { get; }
         public IPermissionRepo PermissionRepo { get; }
+        public IRoleRepo RoleRepo { get; }
 
-        public UnitOfWork(UserManagementContext context,IUserRepo userRepo, IPermissionRepo permissionRepo)
+        public UnitOfWork(UserManagementContext context,IUserRepo userRepo, IPermissionRepo permissionRepo, IRoleRepo roleRepo)
         {
             _context = context;
             UserRepo = userRepo;
             PermissionRepo = permissionRepo;
+            RoleRepo = roleRepo;
         }
         public async Task<int> SaveChangeAsync()
         {

@@ -22,6 +22,7 @@ namespace UserManagement.Winform.CommonControls
 {
     public partial class UserListControl : UserControl
     {
+        #region Ctor and props
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _serviceProvider;
         private readonly IUnitOfWork.IUnitOfWork _unitOfWork;
@@ -33,7 +34,9 @@ namespace UserManagement.Winform.CommonControls
             _unitOfWork = unitOfWork;
             InitializeComponent();
         }
+        #endregion
 
+        #region Events
         private void UserListControl_Load(object sender, EventArgs e)
         {
             //load all the users
@@ -53,7 +56,7 @@ namespace UserManagement.Winform.CommonControls
 
                 var modifyForm = _serviceProvider.GetRequiredService<ModifyUser>();
                 modifyForm.Id = userId;
-                var dialogRes = modifyForm.ShowDialog();               
+                var dialogRes = modifyForm.ShowDialog();
                 LoadDataToUserControl();
 
             }
@@ -69,6 +72,9 @@ namespace UserManagement.Winform.CommonControls
         {
             LoadDataToUserControl();
         }
+        #endregion
+
+        #region Methods
         private void LoadDataToUserControl()
         {
             var userFromDb = _userRepo.GetList(x => true).ToList();
@@ -78,6 +84,7 @@ namespace UserManagement.Winform.CommonControls
             dgvUserList.Rows[0].Selected = false;
             this.Dock = DockStyle.Fill;
             dgvUserList.ClearSelection();
-        }
+        } 
+        #endregion
     }
 }

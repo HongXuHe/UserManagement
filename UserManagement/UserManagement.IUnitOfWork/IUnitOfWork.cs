@@ -9,6 +9,7 @@ namespace UserManagement.IUnitOfWork
       public interface IUnitOfWork
     {
         IUserRepo UserRepo { get; }
+        IRoleRepo RoleRepo { get; }
         IPermissionRepo PermissionRepo { get; }
         int SaveChanges();
         Task<int> SaveChangeAsync();

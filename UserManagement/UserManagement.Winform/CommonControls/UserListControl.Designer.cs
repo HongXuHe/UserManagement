@@ -40,10 +40,13 @@
             this.dgvUserList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUserList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUserList.Location = new System.Drawing.Point(0, 0);
+            this.dgvUserList.MultiSelect = false;
             this.dgvUserList.Name = "dgvUserList";
             this.dgvUserList.ReadOnly = true;
             this.dgvUserList.RowHeadersVisible = false;
             this.dgvUserList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUserList.ShowCellToolTips = false;
+            this.dgvUserList.ShowEditingIcon = false;
             this.dgvUserList.Size = new System.Drawing.Size(780, 496);
             this.dgvUserList.TabIndex = 0;
             this.dgvUserList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUserList_CellContentDoubleClick);

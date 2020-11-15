@@ -12,6 +12,7 @@ namespace UserManagement.Winform.Users
 {
     public partial class ResetPassword : Form
     {
+        #region ctor and props
         public Action<string> PasswordFunc;
         public ResetPassword()
         {
@@ -19,8 +20,10 @@ namespace UserManagement.Winform.Users
             this.txtPwd.Text = string.Empty;
             this.txtConfirmPwd.Text = string.Empty;
 
-        }
+        } 
+        #endregion
 
+        #region Events
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtPwd.Text.Trim()) || string.IsNullOrEmpty(txtConfirmPwd.Text.Trim()))
@@ -30,7 +33,7 @@ namespace UserManagement.Winform.Users
             }
             if (string.Equals(txtPwd.Text.Trim(), txtConfirmPwd.Text.Trim()))
             {
-                if(PasswordFunc != null)
+                if (PasswordFunc != null)
                 {
                     PasswordFunc(txtPwd.Text);
                 }
@@ -47,6 +50,7 @@ namespace UserManagement.Winform.Users
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-        }
+        } 
+        #endregion
     }
 }

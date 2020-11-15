@@ -78,6 +78,17 @@ namespace UserManagement.Winform.Users
             this._resetPwd = null;
             this.Close();
         }
+        private void btnResetPwd_Click(object sender, EventArgs e)
+        {
+            _resetPwd = null;
+            var resetPasswordForm = _serviceProvider.GetRequiredService<ResetPassword>();
+            resetPasswordForm.PasswordFunc += x =>
+            {
+                var resetPwd = Md5Encrypt.GetMD5Hash(AppUser.PasswordSalt + x);
+                this._resetPwd = resetPwd;
+            };
+            var dialogResult = resetPasswordForm.ShowDialog();
+        }
         #endregion
 
         #region Methods
@@ -142,6 +153,7 @@ namespace UserManagement.Winform.Users
             List<PermissionDto> userPermissions = new List<PermissionDto>();
             userPermissionsFromDb = _unitOfWork.UserRepo.GetUserPermissions(_userRepo.FindSingle(u => u.Id.ToString() == Id).Id).ToList();
             userPermissions = Mapping.Mapper.Map<List<PermissionDto>>(userPermissionsFromDb);
+            _permissionList = userPermissions.Select(x => x.PermissionName).ToList();
             var firstLevelPermissionsFromDb = _unitOfWork.PermissionRepo.GetList(x => x.ParentId == null).ToList();
             var firstLevelPermissions = Mapping.Mapper.Map<List<PermissionDto>>(firstLevelPermissionsFromDb);
             var firstAllNode = new TreeNode("All");
@@ -233,16 +245,6 @@ namespace UserManagement.Winform.Users
 
         #endregion
 
-        private void btnResetPwd_Click(object sender, EventArgs e)
-        {
-            _resetPwd = null;
-            var resetPasswordForm = _serviceProvider.GetRequiredService<ResetPassword>();
-            resetPasswordForm.PasswordFunc += x =>
-            {
-                var resetPwd = Md5Encrypt.GetMD5Hash(AppUser.PasswordSalt + x);
-                this._resetPwd = resetPwd;
-            };
-            var dialogResult = resetPasswordForm.ShowDialog();
-        }
+       
     }
 }

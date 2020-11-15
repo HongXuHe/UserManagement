@@ -15,30 +15,34 @@ using System.Windows.Forms;
 using UserManagement.Entity;
 using UserManagement.IRepository;
 using UserManagement.Winform.CommonControls;
+using UserManagement.Winform.Roles;
 using UserManagement.Winform.Users;
 
 namespace UserManagement.Winform
 {
     public partial class MainForm : Form
     {
+        #region ctor and props
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _ServiceProvider;
         public string UserEmail { get; set; }
 
-        public MainForm(IUserRepo userRepo,IServiceProvider serviceProvider)
+        public MainForm(IUserRepo userRepo, IServiceProvider serviceProvider)
         {
             _userRepo = userRepo;
             _ServiceProvider = serviceProvider;
-            InitializeComponent();     
+            InitializeComponent();
         }
+        #endregion
 
- 
+        #region Events
+
         private void button1_Click(object sender, EventArgs e)
         {
-            
-           var form = _ServiceProvider.GetRequiredService<Form2>();
-           
-            Log.Information("form1{time}",DateTime.Now);
+
+            var form = _ServiceProvider.GetRequiredService<Form2>();
+
+            Log.Information("form1{time}", DateTime.Now);
             var list = _userRepo.GetList(x => true).ToList();
             form.Show();
         }
@@ -49,9 +53,9 @@ namespace UserManagement.Winform
             this.Icon = Icon.FromHandle(bmp.GetHicon());
             txtUser.Text = UserEmail;
             plMain.BackgroundImage = UserManagement.Winform.Properties.Resources.bg_MainWindow;
-            var btnDataSubList = _userRepo.GetDataBaseTables(x=>(!x.Contains("Role") && !x.Contains("ApplicationUser") && !x.Contains("ApplicationPermission") && !x.Contains("R_"))).ToList();
-            var btnIdentitySublist = _userRepo.GetDataBaseTables(x => ((x.Contains("ApplicationRole") || x.Contains("ApplicationUser") ||x.Contains("ApplicationPermission")) && !x.Contains("R_"))).ToList();
-           // dynamically add table into btnData DropDownList
+            var btnDataSubList = _userRepo.GetDataBaseTables(x => (!x.Contains("Role") && !x.Contains("ApplicationUser") && !x.Contains("ApplicationPermission") && !x.Contains("R_"))).ToList();
+            var btnIdentitySublist = _userRepo.GetDataBaseTables(x => ((x.Contains("ApplicationRole") || x.Contains("ApplicationUser") || x.Contains("ApplicationPermission")) && !x.Contains("R_"))).ToList();
+            // dynamically add table into btnData DropDownList
             btnData.DropDownItems.Clear();
             foreach (var item in btnDataSubList)
             {
@@ -72,7 +76,7 @@ namespace UserManagement.Winform
 
         private void btnLogoff_Click(object sender, EventArgs e)
         {
-             Application.Exit();
+            Application.Exit();
         }
 
         /// <summary>
@@ -82,7 +86,8 @@ namespace UserManagement.Winform
         /// <param name="e"></param>
         private void individualUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-             var userListControl = _ServiceProvider.GetRequiredService<UserListControl>();
+            var userListControl = _ServiceProvider.GetRequiredService<UserListControl>();
+            plMain.Controls.Clear();
             //var userListControl = new UserListControl(null, null, null);
             plMain.Controls.Add(userListControl);
         }
@@ -93,5 +98,21 @@ namespace UserManagement.Winform
 
             createUser.ShowDialog();
         }
+
+        private void userRolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var roleListControl = _ServiceProvider.GetRequiredService<RoleListControl>();
+            plMain.Controls.Clear();
+            roleListControl.Dock = DockStyle.Fill;
+            plMain.Controls.Add(roleListControl);
+        }
+
+        private void newRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createRole = _ServiceProvider.GetRequiredService<CreateRole>();
+
+            createRole.ShowDialog();
+        } 
+        #endregion
     }
 }

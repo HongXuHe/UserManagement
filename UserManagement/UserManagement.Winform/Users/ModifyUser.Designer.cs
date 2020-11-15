@@ -62,6 +62,7 @@
             this.tabUserFrom.Controls.Add(this.tabRole);
             this.tabUserFrom.Controls.Add(this.tabPermission);
             this.tabUserFrom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabUserFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabUserFrom.Location = new System.Drawing.Point(0, 0);
             this.tabUserFrom.Name = "tabUserFrom";
             this.tabUserFrom.SelectedIndex = 0;
@@ -86,10 +87,10 @@
             this.tabUser.Controls.Add(this.lblEmail);
             this.tabUser.Controls.Add(this.txtUserName);
             this.tabUser.Controls.Add(this.lblUserName);
-            this.tabUser.Location = new System.Drawing.Point(4, 22);
+            this.tabUser.Location = new System.Drawing.Point(4, 34);
             this.tabUser.Name = "tabUser";
             this.tabUser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUser.Size = new System.Drawing.Size(682, 424);
+            this.tabUser.Size = new System.Drawing.Size(682, 412);
             this.tabUser.TabIndex = 0;
             this.tabUser.Text = "User";
             // 
@@ -264,9 +265,9 @@
             // 
             this.tabPermission.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tabPermission.Controls.Add(this.treeViewPermission);
-            this.tabPermission.Location = new System.Drawing.Point(4, 22);
+            this.tabPermission.Location = new System.Drawing.Point(4, 34);
             this.tabPermission.Name = "tabPermission";
-            this.tabPermission.Size = new System.Drawing.Size(682, 424);
+            this.tabPermission.Size = new System.Drawing.Size(682, 412);
             this.tabPermission.TabIndex = 2;
             this.tabPermission.Text = "Permissions";
             // 
@@ -278,7 +279,7 @@
             this.treeViewPermission.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeViewPermission.Location = new System.Drawing.Point(0, 0);
             this.treeViewPermission.Name = "treeViewPermission";
-            this.treeViewPermission.Size = new System.Drawing.Size(682, 424);
+            this.treeViewPermission.Size = new System.Drawing.Size(682, 412);
             this.treeViewPermission.TabIndex = 0;
             this.treeViewPermission.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewPermission_AfterCheck);
             // 

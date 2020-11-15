@@ -53,6 +53,7 @@
             this.txtUser = new System.Windows.Forms.ToolStripLabel();
             this.plMain = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.newRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -153,7 +154,8 @@
             this.btnIdentity.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.individualUsersToolStripMenuItem,
             this.createUserToolStripMenuItem,
-            this.userRolesToolStripMenuItem});
+            this.userRolesToolStripMenuItem,
+            this.newRoleToolStripMenuItem});
             this.btnIdentity.Image = ((System.Drawing.Image)(resources.GetObject("btnIdentity.Image")));
             this.btnIdentity.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnIdentity.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -166,21 +168,22 @@
             // 
             this.individualUsersToolStripMenuItem.Name = "individualUsersToolStripMenuItem";
             this.individualUsersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.individualUsersToolStripMenuItem.Text = "UserList";
+            this.individualUsersToolStripMenuItem.Text = "Users";
             this.individualUsersToolStripMenuItem.Click += new System.EventHandler(this.individualUsersToolStripMenuItem_Click);
             // 
             // createUserToolStripMenuItem
             // 
             this.createUserToolStripMenuItem.Name = "createUserToolStripMenuItem";
             this.createUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.createUserToolStripMenuItem.Text = "Create User";
+            this.createUserToolStripMenuItem.Text = "New User";
             this.createUserToolStripMenuItem.Click += new System.EventHandler(this.createUserToolStripMenuItem_Click);
             // 
             // userRolesToolStripMenuItem
             // 
             this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
             this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.userRolesToolStripMenuItem.Text = "User Roles";
+            this.userRolesToolStripMenuItem.Text = "Roles";
+            this.userRolesToolStripMenuItem.Click += new System.EventHandler(this.userRolesToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -282,6 +285,13 @@
             this.textBox1.Size = new System.Drawing.Size(784, 20);
             this.textBox1.TabIndex = 3;
             // 
+            // newRoleToolStripMenuItem
+            // 
+            this.newRoleToolStripMenuItem.Name = "newRoleToolStripMenuItem";
+            this.newRoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newRoleToolStripMenuItem.Text = "New Role";
+            this.newRoleToolStripMenuItem.Click += new System.EventHandler(this.newRoleToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,6 +341,7 @@
         private System.Windows.Forms.ToolStripButton btnLogoff;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem createUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newRoleToolStripMenuItem;
     }
 }
 
