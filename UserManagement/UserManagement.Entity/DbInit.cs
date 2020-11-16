@@ -29,64 +29,64 @@ namespace UserManagement.Entity
                 UserName = "MattHe1",
                 PhoneNo = "12345678",
             };
-            var permissionWeighing = new ApplicationPermission()
+            var permissionUser = new ApplicationPermission()
             {
-                PermissionName = "Weighing",
-                PermissionValue = "Weighing"
+                PermissionName = "User",
+                PermissionValue = "User"
             };
-            var permissionProduct = new ApplicationPermission()
+            var permissionRole = new ApplicationPermission()
             {
-                PermissionName = "Product",
-                PermissionValue = "Product"
+                PermissionName = "Role",
+                PermissionValue = "Role"
             };
-            var permissionWeighingCreate = new ApplicationPermission()
+            var permissionUserCreate = new ApplicationPermission()
             {
-                PermissionName = "Weighing_Create",
-                PermissionValue = "Weighing_Create",
-                ParentId =permissionWeighing.Id.ToString()
+                PermissionName = "User_Create",
+                PermissionValue = "User_Create",
+                ParentId =permissionUser.Id.ToString()
             };
-            var permissionWeighingEdit = new ApplicationPermission()
+            var permissionUserEdit = new ApplicationPermission()
             {
-                PermissionName = "Weighing_Edit",
-                PermissionValue = "Weighing_Edit",
-                ParentId = permissionWeighing.Id.ToString()
+                PermissionName = "User_Edit",
+                PermissionValue = "User_Edit",
+                ParentId = permissionUser.Id.ToString()
             };
-            var permissionWeighingDelete = new ApplicationPermission()
+            var permissionUserDelete = new ApplicationPermission()
             {
-                PermissionName = "Weighing_Delete",
-                PermissionValue = "Weighing_Delete",
-                ParentId = permissionWeighing.Id.ToString()
+                PermissionName = "User_Delete",
+                PermissionValue = "User_Delete",
+                ParentId = permissionUser.Id.ToString()
             };
-            var permissionProductCreate = new ApplicationPermission()
+            var permissionRoleCreate = new ApplicationPermission()
             {
-                PermissionName = "Product_Create",
-                PermissionValue = "Product_Create",
-                ParentId = permissionProduct.Id.ToString()
+                PermissionName = "Role_Create",
+                PermissionValue = "Role_Create",
+                ParentId = permissionRole.Id.ToString()
             };
-            var permissionProductEdit = new ApplicationPermission()
+            var permissionRoleEdit = new ApplicationPermission()
             {
-                PermissionName = "Product_Edit",
-                PermissionValue = "Product_Edit",
-                ParentId = permissionProduct.Id.ToString()
+                PermissionName = "Role_Edit",
+                PermissionValue = "Role_Edit",
+                ParentId = permissionRole.Id.ToString()
             };
-            var permissionProductDelete = new ApplicationPermission()
+            var permissionRoleDelete = new ApplicationPermission()
             {
-                PermissionName = "Product_Delete",
-                PermissionValue = "Product_Delete",
-                ParentId = permissionProduct.Id.ToString()
+                PermissionName = "Role_Delete",
+                PermissionValue = "Role_Delete",
+                ParentId = permissionRole.Id.ToString()
             };
             user.Password = Md5Encrypt.GetMD5Hash(user.PasswordSalt + "1234");
             context.ApplicationUsers.Add(user);
             context.ApplicationUsers.Add(user2);
             context.ApplicationRoles.Add(role);
-            context.ApplicationPermissions.Add(permissionWeighing);
-            context.ApplicationPermissions.Add(permissionProduct);
-            context.ApplicationPermissions.Add(permissionWeighingCreate);
-            context.ApplicationPermissions.Add(permissionWeighingEdit);
-            context.ApplicationPermissions.Add(permissionWeighingDelete);
-            context.ApplicationPermissions.Add(permissionProductCreate);
-            context.ApplicationPermissions.Add(permissionProductEdit);
-            context.ApplicationPermissions.Add(permissionProductDelete);
+            context.ApplicationPermissions.Add(permissionUser);
+            context.ApplicationPermissions.Add(permissionRole);
+            context.ApplicationPermissions.Add(permissionUserCreate);
+            context.ApplicationPermissions.Add(permissionUserEdit);
+            context.ApplicationPermissions.Add(permissionUserDelete);
+            context.ApplicationPermissions.Add(permissionRoleCreate);
+            context.ApplicationPermissions.Add(permissionRoleEdit);
+            context.ApplicationPermissions.Add(permissionRoleDelete);
             context.R_User_Roles.Add(new R_User_Role() { ApplicationRoleId = role.Id, ApplicationUserId = user.Id });
             context.SaveChanges();
         }

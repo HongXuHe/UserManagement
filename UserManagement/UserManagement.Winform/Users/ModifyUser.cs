@@ -30,6 +30,7 @@ namespace UserManagement.Winform.Users
         private readonly IServiceProvider _serviceProvider;
         private readonly IUnitOfWork.IUnitOfWork _unitOfWork;
         private List<string> _permissionList = new List<string>();
+        private List<string> _userPermissions = new List<string>();
 
         public string Id { get; set; }
         public UserDto _user { get; set; }
@@ -56,6 +57,7 @@ namespace UserManagement.Winform.Users
             LoadUser();
             LoadRole();
             LoadPermission();
+            _userPermissions = RetrieveUserPermissions.GetPermissions(txtEmail.TrimString(), _userRepo, _roleRepo, _permissionRepo);
             tabUserFrom.SelectedIndex = 0; //will not trigger selecteIndexChange event, have to call loaduser() manually
 
         }
@@ -69,6 +71,11 @@ namespace UserManagement.Winform.Users
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!_userPermissions.Contains("User_Edit"))
+            {
+                MessageBox.Show("No Edit permission");
+                return;
+            }
             SaveUser();
             this._resetPwd = null;
             this.Close();
@@ -80,6 +87,11 @@ namespace UserManagement.Winform.Users
         }
         private void btnResetPwd_Click(object sender, EventArgs e)
         {
+            if (!_userPermissions.Contains("User_Edit"))
+            {
+                MessageBox.Show("No Edit permission");
+                return;
+            }
             _resetPwd = null;
             var resetPasswordForm = _serviceProvider.GetRequiredService<ResetPassword>();
             resetPasswordForm.PasswordFunc += x =>

@@ -52,11 +52,21 @@ namespace UserManagement.Winform.Users
                     var hashInputPwd = Md5Encrypt.GetMD5Hash(string.Concat(userFromDb.PasswordSalt, userPassword));
                     if (userFromDb.Password ==hashInputPwd)
                     {
-                        Log.Logger.Information("user {0},{1} logged in", userFromDb.UserName, userFromDb.Email);
-                        var mainForm = _serviceProvider.GetRequiredService<MainForm>();
-                        mainForm.UserEmail = userEmail;
-                        mainForm.Show();
-                        this.Hide();
+                        // make sure the user's account is still effect
+                        if(userFromDb.EffectDate <=DateTime.Now &&(userFromDb.ExpireDate ==null || userFromDb.ExpireDate >= DateTime.Now))
+                        {
+                            Log.Logger.Information("user {0},{1} logged in", userFromDb.UserName, userFromDb.Email);
+                            var mainForm = _serviceProvider.GetRequiredService<MainForm>();
+                            mainForm.UserEmail = userEmail;
+                            mainForm.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            Log.Logger.Error("user {0} try to log in failed because of effect state", userFromDb.Email);
+                            MessageBox.Show("Account is not start effect or is expired");
+                        }
+                        
                         return;
                     }
                     else

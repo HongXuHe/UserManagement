@@ -17,6 +17,7 @@ using Serilog;
 using Microsoft.EntityFrameworkCore;
 using UserManagement.UnitOfWok;
 using UserManagement.IUnitOfWork;
+using UserManagement.Winform.CommonClass;
 
 namespace UserManagement.Winform.CommonControls
 {
@@ -26,12 +27,19 @@ namespace UserManagement.Winform.CommonControls
         private readonly IUserRepo _userRepo;
         private readonly IServiceProvider _serviceProvider;
         private readonly IUnitOfWork.IUnitOfWork _unitOfWork;
+        private readonly IRoleRepo _roleRepo;
+        private readonly IPermissionRepo _permissionRepo;
 
-        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider, IUnitOfWork.IUnitOfWork unitOfWork)
+        public string UserEmail { get; set; }
+        private List<string> _userPermissions = new List<string>();
+
+        public UserListControl(IUserRepo userRepo, IServiceProvider serviceProvider, IUnitOfWork.IUnitOfWork unitOfWork, IRoleRepo roleRepo, IPermissionRepo permissionRepo)
         {
             _userRepo = userRepo;
             _serviceProvider = serviceProvider;
             _unitOfWork = unitOfWork;
+            _roleRepo = roleRepo;
+            _permissionRepo = permissionRepo;
             InitializeComponent();
         }
         #endregion
@@ -41,10 +49,17 @@ namespace UserManagement.Winform.CommonControls
         {
             //load all the users
             LoadDataToUserControl();
+            _userPermissions = RetrieveUserPermissions.GetPermissions(UserEmail, _userRepo, _roleRepo, _permissionRepo);
+
         }
 
         private void dgvUserList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            //no permission will return
+            if (!_userPermissions.Contains("User_Edit"))
+            {
+                return;
+            }
             if (e.RowIndex == -1)
             {
                 return;
@@ -52,7 +67,7 @@ namespace UserManagement.Winform.CommonControls
             try
             {
                 DataGridViewRow dataGridViewRow = dgvUserList.Rows[e.RowIndex];
-                var userId = dataGridViewRow.Cells["Id"].Value.ToString();
+                var userId = dataGridViewRow.Cells["Id"].Value.ToString();                
 
                 var modifyForm = _serviceProvider.GetRequiredService<ModifyUser>();
                 modifyForm.Id = userId;

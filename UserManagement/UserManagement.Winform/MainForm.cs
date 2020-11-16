@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserManagement.Entity;
 using UserManagement.IRepository;
+using UserManagement.Winform.CommonClass;
 using UserManagement.Winform.CommonControls;
 using UserManagement.Winform.Roles;
 using UserManagement.Winform.Users;
@@ -24,12 +25,17 @@ namespace UserManagement.Winform
     {
         #region ctor and props
         private readonly IUserRepo _userRepo;
+        private readonly IRoleRepo _roleRepo;
+        private readonly IPermissionRepo _permissionRepo;
         private readonly IServiceProvider _ServiceProvider;
         public string UserEmail { get; set; }
+        private List<string> _userPermissions = new List<string>();
 
-        public MainForm(IUserRepo userRepo, IServiceProvider serviceProvider)
+        public MainForm(IUserRepo userRepo, IRoleRepo roleRepo, IPermissionRepo permissionRepo, IServiceProvider serviceProvider)
         {
             _userRepo = userRepo;
+            _roleRepo = roleRepo;
+            _permissionRepo = permissionRepo;
             _ServiceProvider = serviceProvider;
             InitializeComponent();
         }
@@ -49,6 +55,16 @@ namespace UserManagement.Winform
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            _userPermissions = RetrieveUserPermissions.GetPermissions(UserEmail, _userRepo, _roleRepo, _permissionRepo);
+            if (!_userPermissions.Contains("User_Create"))
+            {
+                createUserToolStripMenuItem.Visible = false;
+            }
+            if (!_userPermissions.Contains("Role_Create"))
+            {
+                newRoleToolStripMenuItem.Visible = false;
+            }
+
             var bmp = new Bitmap(UserManagement.Winform.Properties.Resources.nwiclient);
             this.Icon = Icon.FromHandle(bmp.GetHicon());
             txtUser.Text = UserEmail;
@@ -88,6 +104,7 @@ namespace UserManagement.Winform
         {
             var userListControl = _ServiceProvider.GetRequiredService<UserListControl>();
             plMain.Controls.Clear();
+            userListControl.UserEmail = UserEmail;
             //var userListControl = new UserListControl(null, null, null);
             plMain.Controls.Add(userListControl);
         }
@@ -103,6 +120,7 @@ namespace UserManagement.Winform
         {
             var roleListControl = _ServiceProvider.GetRequiredService<RoleListControl>();
             plMain.Controls.Clear();
+            roleListControl.UserEmail = UserEmail;
             roleListControl.Dock = DockStyle.Fill;
             plMain.Controls.Add(roleListControl);
         }
@@ -112,7 +130,7 @@ namespace UserManagement.Winform
             var createRole = _ServiceProvider.GetRequiredService<CreateRole>();
 
             createRole.ShowDialog();
-        } 
+        }
         #endregion
     }
 }

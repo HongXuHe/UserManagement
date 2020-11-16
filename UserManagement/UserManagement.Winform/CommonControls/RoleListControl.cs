@@ -12,6 +12,8 @@ using UserManagement.Dtos;
 using Serilog;
 using Microsoft.Extensions.DependencyInjection;
 using UserManagement.Winform.Roles;
+using UserManagement.IRepository;
+using UserManagement.Winform.CommonClass;
 
 namespace UserManagement.Winform.CommonControls
 {
@@ -20,11 +22,19 @@ namespace UserManagement.Winform.CommonControls
         #region Ctor and props
         private readonly IUnitOfWork.IUnitOfWork _unitOfWork;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IUserRepo _userRepo;
+        private readonly IRoleRepo _roleRepo;
+        private readonly IPermissionRepo _permissionRepo;
+        public string UserEmail { get; set; }
+        private List<string> _userPermissions = new List<string>();
 
-        public RoleListControl(IUnitOfWork.IUnitOfWork unitOfWork, IServiceProvider serviceProvider)
+        public RoleListControl(IUnitOfWork.IUnitOfWork unitOfWork, IServiceProvider serviceProvider,IUserRepo userRepo, IRoleRepo roleRepo, IPermissionRepo permissionRepo)
         {
             _unitOfWork = unitOfWork;
             _serviceProvider = serviceProvider;
+            _userRepo = userRepo;
+            _roleRepo = roleRepo;
+            _permissionRepo = permissionRepo;
             InitializeComponent();
         }
         #endregion
@@ -37,6 +47,10 @@ namespace UserManagement.Winform.CommonControls
 
         private void dgvRoleList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!_userPermissions.Contains("Role_Edit"))
+            {
+                return;
+            }
             if (e.RowIndex == -1)
             {
                 return;
@@ -68,6 +82,7 @@ namespace UserManagement.Winform.CommonControls
         #region Methods
         private void LoadRolesIntoDgv()
         {
+            _userPermissions = RetrieveUserPermissions.GetPermissions(UserEmail, _userRepo, _roleRepo, _permissionRepo);
             var roles = Mapping.Mapper.Map<List<RoleDto>>(_unitOfWork.RoleRepo.GetList(x => true));
             dgvRoleList.DataSource = null;
             dgvRoleList.DataSource = roles;
