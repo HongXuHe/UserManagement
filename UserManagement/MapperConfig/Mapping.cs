@@ -33,6 +33,8 @@ namespace MapperConfig
             CreateMap<UserDto, ApplicationUser>();
             CreateMap<ApplicationRole, RoleDto>();
             CreateMap<ApplicationPermission, PermissionDto>();
+            CreateMap<Device, DeviceDto>();
+            CreateMap<DeviceDto, Device>();
         }
     }
 }

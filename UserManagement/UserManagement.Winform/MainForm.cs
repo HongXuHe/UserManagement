@@ -16,6 +16,7 @@ using UserManagement.Entity;
 using UserManagement.IRepository;
 using UserManagement.Winform.CommonClass;
 using UserManagement.Winform.CommonControls;
+using UserManagement.Winform.Devices;
 using UserManagement.Winform.Roles;
 using UserManagement.Winform.Users;
 
@@ -131,6 +132,22 @@ namespace UserManagement.Winform
 
             createRole.ShowDialog();
         }
+        private void deviceListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var deviceListControl = _ServiceProvider.GetRequiredService<DeviceListControl>();
+            deviceListControl.Dock = DockStyle.Fill;
+            plMain.Controls.Clear();
+            deviceListControl.UserEmail = UserEmail;
+            plMain.Controls.Add(deviceListControl);
+        }
+        private void newDeviceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createDevice = _ServiceProvider.GetRequiredService<CreateDevice>();
+
+            createDevice.ShowDialog();
+        }
         #endregion
+
+
     }
 }

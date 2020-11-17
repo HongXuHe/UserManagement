@@ -66,6 +66,13 @@ namespace UserManagement.Entity
                // x.HasOne(z => z.ApplicationPermission).WithMany(c => c.ApplicationRoles).HasForeignKey(y => y.ApplicationPermissionId);
             });
             #endregion
+
+            #region Device
+            modelBuilder.Entity<Device>(x =>
+            {
+                x.HasKey(d => d.Id);
+            });
+            #endregion
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
@@ -74,5 +81,6 @@ namespace UserManagement.Entity
         public DbSet<R_User_Permission> R_User_Permissions { get; set; }
         public DbSet<R_User_Role> R_User_Roles { get; set; }
         public DbSet<R_Role_Permission> R_Role_Permissions { get; set; }
+        public DbSet<Device> Devices { get; set; }
     }
 }

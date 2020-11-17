@@ -42,6 +42,7 @@
             this.individualUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnToolbox = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportRecordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,7 @@
             this.txtUser = new System.Windows.Forms.ToolStripLabel();
             this.plMain = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.newRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,7 +123,8 @@
             // 
             this.btnDevice.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deviceListToolStripMenuItem,
-            this.communicationToolStripMenuItem});
+            this.communicationToolStripMenuItem,
+            this.newDeviceToolStripMenuItem});
             this.btnDevice.Image = ((System.Drawing.Image)(resources.GetObject("btnDevice.Image")));
             this.btnDevice.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDevice.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -134,13 +136,14 @@
             // deviceListToolStripMenuItem
             // 
             this.deviceListToolStripMenuItem.Name = "deviceListToolStripMenuItem";
-            this.deviceListToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.deviceListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deviceListToolStripMenuItem.Text = "DeviceList";
+            this.deviceListToolStripMenuItem.Click += new System.EventHandler(this.deviceListToolStripMenuItem_Click);
             // 
             // communicationToolStripMenuItem
             // 
             this.communicationToolStripMenuItem.Name = "communicationToolStripMenuItem";
-            this.communicationToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.communicationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.communicationToolStripMenuItem.Text = "Communication";
             // 
             // toolStripSeparator3
@@ -167,23 +170,30 @@
             // individualUsersToolStripMenuItem
             // 
             this.individualUsersToolStripMenuItem.Name = "individualUsersToolStripMenuItem";
-            this.individualUsersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.individualUsersToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.individualUsersToolStripMenuItem.Text = "Users";
             this.individualUsersToolStripMenuItem.Click += new System.EventHandler(this.individualUsersToolStripMenuItem_Click);
             // 
             // createUserToolStripMenuItem
             // 
             this.createUserToolStripMenuItem.Name = "createUserToolStripMenuItem";
-            this.createUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createUserToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.createUserToolStripMenuItem.Text = "New User";
             this.createUserToolStripMenuItem.Click += new System.EventHandler(this.createUserToolStripMenuItem_Click);
             // 
             // userRolesToolStripMenuItem
             // 
             this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
-            this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.userRolesToolStripMenuItem.Text = "Roles";
             this.userRolesToolStripMenuItem.Click += new System.EventHandler(this.userRolesToolStripMenuItem_Click);
+            // 
+            // newRoleToolStripMenuItem
+            // 
+            this.newRoleToolStripMenuItem.Name = "newRoleToolStripMenuItem";
+            this.newRoleToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.newRoleToolStripMenuItem.Text = "New Role";
+            this.newRoleToolStripMenuItem.Click += new System.EventHandler(this.newRoleToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -285,12 +295,12 @@
             this.textBox1.Size = new System.Drawing.Size(784, 20);
             this.textBox1.TabIndex = 3;
             // 
-            // newRoleToolStripMenuItem
+            // newDeviceToolStripMenuItem
             // 
-            this.newRoleToolStripMenuItem.Name = "newRoleToolStripMenuItem";
-            this.newRoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newRoleToolStripMenuItem.Text = "New Role";
-            this.newRoleToolStripMenuItem.Click += new System.EventHandler(this.newRoleToolStripMenuItem_Click);
+            this.newDeviceToolStripMenuItem.Name = "newDeviceToolStripMenuItem";
+            this.newDeviceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newDeviceToolStripMenuItem.Text = "NewDevice";
+            this.newDeviceToolStripMenuItem.Click += new System.EventHandler(this.newDeviceToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -342,6 +352,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem createUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newRoleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newDeviceToolStripMenuItem;
     }
 }
 

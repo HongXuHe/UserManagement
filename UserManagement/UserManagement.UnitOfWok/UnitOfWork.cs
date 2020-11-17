@@ -12,13 +12,19 @@ namespace UserManagement.UnitOfWok
         public IUserRepo UserRepo { get; }
         public IPermissionRepo PermissionRepo { get; }
         public IRoleRepo RoleRepo { get; }
+        public IDeviceRepo DeviceRepo { get; }
 
-        public UnitOfWork(UserManagementContext context,IUserRepo userRepo, IPermissionRepo permissionRepo, IRoleRepo roleRepo)
+        public UnitOfWork(UserManagementContext context,
+            IUserRepo userRepo,
+            IPermissionRepo permissionRepo,
+            IRoleRepo roleRepo,
+            IDeviceRepo deviceRepo)
         {
             _context = context;
             UserRepo = userRepo;
             PermissionRepo = permissionRepo;
             RoleRepo = roleRepo;
+            DeviceRepo = deviceRepo;
         }
         public async Task<int> SaveChangeAsync()
         {

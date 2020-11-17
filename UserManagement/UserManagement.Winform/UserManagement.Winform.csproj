@@ -53,6 +53,12 @@
   <ItemGroup>
     <Compile Include="CommonClass\PermissionToTreeView.cs" />
     <Compile Include="CommonClass\RetrieveUserPermissions.cs" />
+    <Compile Include="CommonControls\DeviceListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\DeviceListControl.Designer.cs">
+      <DependentUpon>DeviceListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommonControls\RoleListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,6 +76,18 @@
     </Compile>
     <Compile Include="CommonControls\UserListControl.Designer.cs">
       <DependentUpon>UserListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devices\CreateDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devices\CreateDevice.Designer.cs">
+      <DependentUpon>CreateDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devices\ModifyDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devices\ModifyDevice.Designer.cs">
+      <DependentUpon>ModifyDevice.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -132,6 +150,9 @@
     <Compile Include="Users\ResetPassword.Designer.cs">
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CommonControls\DeviceListControl.resx">
+      <DependentUpon>DeviceListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommonControls\RoleListControl.resx">
       <DependentUpon>RoleListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommonControls\UserListControl.resx">
       <DependentUpon>UserListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devices\CreateDevice.resx">
+      <DependentUpon>CreateDevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

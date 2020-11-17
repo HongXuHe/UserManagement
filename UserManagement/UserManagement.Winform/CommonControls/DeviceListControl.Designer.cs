@@ -1,6 +1,6 @@
 ﻿namespace UserManagement.Winform.CommonControls
 {
-    partial class RoleListControl
+    partial class DeviceListControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dgvRoleList = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRoleList)).BeginInit();
+            this.dgvDeviceList = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDeviceList)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvRoleList
+            // dgvDeviceList
             // 
-            this.dgvRoleList.AllowUserToAddRows = false;
-            this.dgvRoleList.AllowUserToDeleteRows = false;
-            this.dgvRoleList.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvRoleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDeviceList.AllowUserToAddRows = false;
+            this.dgvDeviceList.AllowUserToDeleteRows = false;
+            this.dgvDeviceList.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvDeviceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -46,36 +46,34 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRoleList.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvRoleList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRoleList.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvRoleList.Location = new System.Drawing.Point(0, 0);
-            this.dgvRoleList.MultiSelect = false;
-            this.dgvRoleList.Name = "dgvRoleList";
-            this.dgvRoleList.ReadOnly = true;
-            this.dgvRoleList.RowHeadersVisible = false;
-            this.dgvRoleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRoleList.Size = new System.Drawing.Size(926, 605);
-            this.dgvRoleList.TabIndex = 0;
-            this.dgvRoleList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoleList_CellContentClick);
-            this.dgvRoleList.VisibleChanged += new System.EventHandler(this.dgvRoleList_VisibleChanged);
+            this.dgvDeviceList.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDeviceList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDeviceList.Location = new System.Drawing.Point(0, 0);
+            this.dgvDeviceList.MultiSelect = false;
+            this.dgvDeviceList.Name = "dgvDeviceList";
+            this.dgvDeviceList.ReadOnly = true;
+            this.dgvDeviceList.RowHeadersVisible = false;
+            this.dgvDeviceList.Size = new System.Drawing.Size(858, 456);
+            this.dgvDeviceList.TabIndex = 0;
+            this.dgvDeviceList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDeviceList_CellContentClick);
+            this.dgvDeviceList.VisibleChanged += new System.EventHandler(this.dgvDeviceList_VisibleChanged);
             // 
-            // RoleListControl
+            // DeviceListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Controls.Add(this.dgvRoleList);
-            this.Name = "RoleListControl";
-            this.Size = new System.Drawing.Size(926, 605);
-            this.Load += new System.EventHandler(this.RoleListControl_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRoleList)).EndInit();
+            this.Controls.Add(this.dgvDeviceList);
+            this.Name = "DeviceListControl";
+            this.Size = new System.Drawing.Size(858, 456);
+            this.Load += new System.EventHandler(this.DeviceListControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDeviceList)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvRoleList;
+        private System.Windows.Forms.DataGridView dgvDeviceList;
     }
 }

@@ -11,6 +11,7 @@ namespace UserManagement.IUnitOfWork
         IUserRepo UserRepo { get; }
         IRoleRepo RoleRepo { get; }
         IPermissionRepo PermissionRepo { get; }
+        IDeviceRepo DeviceRepo { get; }
         int SaveChanges();
         Task<int> SaveChangeAsync();
     }
