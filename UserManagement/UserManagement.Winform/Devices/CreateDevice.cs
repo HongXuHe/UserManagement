@@ -113,7 +113,7 @@ namespace UserManagement.Winform.Devices
 
                     Log.Logger.Error(ex, "save device error");
                 }
-
+                this.Close();
             }
             else
             {

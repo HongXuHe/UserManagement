@@ -33,10 +33,11 @@
             this.btnHome = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnData = new System.Windows.Forms.ToolStripDropDownButton();
+            this.newRFIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDevice = new System.Windows.Forms.ToolStripDropDownButton();
             this.deviceListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.communicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnIdentity = new System.Windows.Forms.ToolStripDropDownButton();
             this.individualUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,6 @@
             this.txtUser = new System.Windows.Forms.ToolStripLabel();
             this.plMain = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.newDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +105,8 @@
             // 
             // btnData
             // 
+            this.btnData.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newRFIDToolStripMenuItem});
             this.btnData.Image = ((System.Drawing.Image)(resources.GetObject("btnData.Image")));
             this.btnData.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnData.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -112,6 +114,13 @@
             this.btnData.Size = new System.Drawing.Size(45, 61);
             this.btnData.Text = "Data";
             this.btnData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // newRFIDToolStripMenuItem
+            // 
+            this.newRFIDToolStripMenuItem.Name = "newRFIDToolStripMenuItem";
+            this.newRFIDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newRFIDToolStripMenuItem.Text = "NewRFID";
+            this.newRFIDToolStripMenuItem.Click += new System.EventHandler(this.newRFIDToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -123,7 +132,6 @@
             // 
             this.btnDevice.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deviceListToolStripMenuItem,
-            this.communicationToolStripMenuItem,
             this.newDeviceToolStripMenuItem});
             this.btnDevice.Image = ((System.Drawing.Image)(resources.GetObject("btnDevice.Image")));
             this.btnDevice.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -136,15 +144,16 @@
             // deviceListToolStripMenuItem
             // 
             this.deviceListToolStripMenuItem.Name = "deviceListToolStripMenuItem";
-            this.deviceListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deviceListToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.deviceListToolStripMenuItem.Text = "DeviceList";
             this.deviceListToolStripMenuItem.Click += new System.EventHandler(this.deviceListToolStripMenuItem_Click);
             // 
-            // communicationToolStripMenuItem
+            // newDeviceToolStripMenuItem
             // 
-            this.communicationToolStripMenuItem.Name = "communicationToolStripMenuItem";
-            this.communicationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.communicationToolStripMenuItem.Text = "Communication";
+            this.newDeviceToolStripMenuItem.Name = "newDeviceToolStripMenuItem";
+            this.newDeviceToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.newDeviceToolStripMenuItem.Text = "NewDevice";
+            this.newDeviceToolStripMenuItem.Click += new System.EventHandler(this.newDeviceToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -295,13 +304,6 @@
             this.textBox1.Size = new System.Drawing.Size(784, 20);
             this.textBox1.TabIndex = 3;
             // 
-            // newDeviceToolStripMenuItem
-            // 
-            this.newDeviceToolStripMenuItem.Name = "newDeviceToolStripMenuItem";
-            this.newDeviceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newDeviceToolStripMenuItem.Text = "NewDevice";
-            this.newDeviceToolStripMenuItem.Click += new System.EventHandler(this.newDeviceToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,7 +336,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton btnDevice;
         private System.Windows.Forms.ToolStripMenuItem deviceListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem communicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripDropDownButton btnIdentity;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -353,6 +354,7 @@
         private System.Windows.Forms.ToolStripMenuItem createUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newRoleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newDeviceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newRFIDToolStripMenuItem;
     }
 }
 

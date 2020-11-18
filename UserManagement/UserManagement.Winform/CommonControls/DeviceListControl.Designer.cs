@@ -53,6 +53,7 @@
             this.dgvDeviceList.Name = "dgvDeviceList";
             this.dgvDeviceList.ReadOnly = true;
             this.dgvDeviceList.RowHeadersVisible = false;
+            this.dgvDeviceList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDeviceList.Size = new System.Drawing.Size(858, 456);
             this.dgvDeviceList.TabIndex = 0;
             this.dgvDeviceList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDeviceList_CellContentClick);

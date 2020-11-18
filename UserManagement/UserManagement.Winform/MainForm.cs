@@ -16,6 +16,7 @@ using UserManagement.Entity;
 using UserManagement.IRepository;
 using UserManagement.Winform.CommonClass;
 using UserManagement.Winform.CommonControls;
+using UserManagement.Winform.Data;
 using UserManagement.Winform.Devices;
 using UserManagement.Winform.Roles;
 using UserManagement.Winform.Users;
@@ -70,14 +71,16 @@ namespace UserManagement.Winform
             this.Icon = Icon.FromHandle(bmp.GetHicon());
             txtUser.Text = UserEmail;
             plMain.BackgroundImage = UserManagement.Winform.Properties.Resources.bg_MainWindow;
-            var btnDataSubList = _userRepo.GetDataBaseTables(x => (!x.Contains("Role") && !x.Contains("ApplicationUser") && !x.Contains("ApplicationPermission") && !x.Contains("R_"))).ToList();
-            var btnIdentitySublist = _userRepo.GetDataBaseTables(x => ((x.Contains("ApplicationRole") || x.Contains("ApplicationUser") || x.Contains("ApplicationPermission")) && !x.Contains("R_"))).ToList();
-            // dynamically add table into btnData DropDownList
-            btnData.DropDownItems.Clear();
-            foreach (var item in btnDataSubList)
-            {
-                btnData.DropDownItems.Add(item.Substring(22));
-            }
+            #region dynamically add list to btnData commont out
+            //var btnDataSubList = _userRepo.GetDataBaseTables(x => (!x.Contains("Role") && !x.Contains("ApplicationUser") && !x.Contains("ApplicationPermission") && !x.Contains("R_"))).ToList();
+            //var btnIdentitySublist = _userRepo.GetDataBaseTables(x => ((x.Contains("ApplicationRole") || x.Contains("ApplicationUser") || x.Contains("ApplicationPermission")) && !x.Contains("R_"))).ToList();
+            //// dynamically add table into btnData DropDownList
+            //btnData.DropDownItems.Clear();
+            //foreach (var item in btnDataSubList)
+            //{
+            //    btnData.DropDownItems.Add(item.Substring(22));
+            //} 
+            #endregion
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -146,6 +149,14 @@ namespace UserManagement.Winform
 
             createDevice.ShowDialog();
         }
+
+        private void newRFIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createRFID = _ServiceProvider.GetRequiredService<NewRFID>();
+
+            createRFID.ShowDialog();
+        }
+
         #endregion
 
 

@@ -77,6 +77,12 @@
     <Compile Include="CommonControls\UserListControl.Designer.cs">
       <DependentUpon>UserListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\NewRFID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\NewRFID.Designer.cs">
+      <DependentUpon>NewRFID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Devices\CreateDevice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,8 +168,14 @@
     <EmbeddedResource Include="CommonControls\UserListControl.resx">
       <DependentUpon>UserListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\NewRFID.resx">
+      <DependentUpon>NewRFID.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Devices\CreateDevice.resx">
       <DependentUpon>CreateDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devices\ModifyDevice.resx">
+      <DependentUpon>ModifyDevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

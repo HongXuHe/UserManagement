@@ -13,6 +13,7 @@ using MapperConfig;
 using UserManagement.Dtos;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using UserManagement.Winform.Devices;
 
 namespace UserManagement.Winform.CommonControls
 {
@@ -68,11 +69,11 @@ namespace UserManagement.Winform.CommonControls
             }
             try
             {
-                //DataGridViewRow dataGridViewRow = dgvDeviceList.Rows[e.RowIndex];
-                //var deviceId = dataGridViewRow.Cells["Id"].Value.ToString();
-                //var modifyForm = _serviceProvider.GetRequiredService<>();
-                //modifyForm.RoleName = roleName;
-                //var dialogRes = modifyForm.ShowDialog();
+                DataGridViewRow dataGridViewRow = dgvDeviceList.Rows[e.RowIndex];
+                var deviceId = dataGridViewRow.Cells["Id"].Value.ToString();
+                var modifyForm = _serviceProvider.GetRequiredService<ModifyDevice>();
+                modifyForm.Device = _deviceRepo.FindSingle(x=>x.Id.ToString() ==deviceId);
+                var dialogRes = modifyForm.ShowDialog();
                 LoadDeviceIntoDgv();
 
             }
